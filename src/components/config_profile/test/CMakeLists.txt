@@ -25,29 +25,33 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-project(formatters)
+file(COPY smartDeviceLink.ini DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY smartDeviceLink_test.ini DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY
+     smartDeviceLink_invalid_pairs.ini
+     DESTINATION
+     ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY
+     smartDeviceLink_invalid_string.ini
+     DESTINATION
+     ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY
+     smartDeviceLink_invalid_int.ini
+     DESTINATION
+     ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY
+     smartDeviceLink_invalid_boolean.ini
+     DESTINATION
+     ${CMAKE_CURRENT_BINARY_DIR})
 
-add_library(${PROJECT_NAME} STATIC)
-add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+project(config_profile_test)
+create_test(${PROJECT_NAME})
 
 target_sources(${PROJECT_NAME}
                PRIVATE
-               "${CMAKE_CURRENT_LIST_DIR}/src/CFormatterJsonBase.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/CFormatterJsonSDLRPCv1.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/CFormatterJsonSDLRPCv2.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/CSmartFactory.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/formatter_json_rpc.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/generic_json_formatter.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/meta_formatter.cc")
+               ${CMAKE_CURRENT_SOURCE_DIR}/ini_file_test.cc
+               ${CMAKE_CURRENT_SOURCE_DIR}/profile_test.cc)
 
 target_link_libraries(${PROJECT_NAME}
-                      PUBLIC smart_objects::smart_objects utils::utils
-                             jsoncpp::jsoncpp
-                      PRIVATE components::interface)
-
-target_include_directories(${PROJECT_NAME}
-                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include")
-
-if(BUILD_TESTS)
-  add_subdirectory(test)
-endif()
+                      PRIVATE config_profile::config_profile
+                              components::interface)

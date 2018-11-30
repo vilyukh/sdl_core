@@ -51,10 +51,9 @@ target_sources(
   )
 
 if(BUILD_TESTS)
-  target_sources(${PROJECT_NAME}
-    PRIVATE
-      "${CMAKE_CURRENT_LIST_DIR}/src/iap2_emulation/iap2_transport_adapter.cc"
-  )
+  target_sources(
+    ${PROJECT_NAME} PRIVATE
+    "${CMAKE_CURRENT_LIST_DIR}/src/iap2_emulation/iap2_transport_adapter.cc")
 endif()
 
 if(QNXNTO)
@@ -138,3 +137,7 @@ endif()
 
 target_include_directories(${PROJECT_NAME}
                            PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include")
+
+if(BUILD_TESTS)
+  add_subdirectory(test)
+endif()
