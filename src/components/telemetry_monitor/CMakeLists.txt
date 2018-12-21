@@ -31,16 +31,17 @@ add_library(${PROJECT_NAME} STATIC)
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 target_sources(
-  ${PROJECT_NAME}
-  PRIVATE
-  "${CMAKE_CURRENT_LIST_DIR}/src/application_manager_metric_wrapper.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/application_manager_observer.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/metric_wrapper.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/protocol_handler_metric_wrapper.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/protocol_handler_observer.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/telemetry_monitor.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/transport_manager_metric_wrapper.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/transport_manager_observer.cc")
+    ${PROJECT_NAME}
+    PRIVATE
+    "${CMAKE_CURRENT_LIST_DIR}/src/application_manager_metric_wrapper.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/application_manager_observer.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/metric_wrapper.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/protocol_handler_metric_wrapper.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/protocol_handler_observer.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/telemetry_monitor.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/transport_manager_metric_wrapper.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/transport_manager_observer.cc"
+)
 
 target_link_libraries(${PROJECT_NAME}
                       PUBLIC utils::utils
@@ -48,11 +49,13 @@ target_link_libraries(${PROJECT_NAME}
                              application_manager::application_manager
                              transport_manager::transport_manager
                              jsoncpp::jsoncpp
-                      PRIVATE components::interface)
+                      PRIVATE components::interface
+)
 
 target_include_directories(${PROJECT_NAME}
-                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include")
+                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
+)
 
 if(BUILD_TESTS)
-  add_subdirectory(test)
+    add_subdirectory(test)
 endif()

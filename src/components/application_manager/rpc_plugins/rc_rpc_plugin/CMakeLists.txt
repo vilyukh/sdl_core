@@ -28,39 +28,40 @@
 project(rpc_plugins)
 
 set(
-  PLUGIN_SOURCES
-  "${CMAKE_CURRENT_LIST_DIR}/src/interior_data_cache_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/interior_data_manager_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/rc_app_extension.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/rc_command_factory.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/rc_helpers.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/rc_rpc_plugin.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/resource_allocation_manager_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/rc_command_request.cc"
-  # commands/hmi
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/rc_button_press_request.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/rc_button_press_response.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/rc_get_interior_vehicle_data_consent_request.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/rc_get_interior_vehicle_data_consent_response.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/rc_get_interior_vehicle_data_request.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/rc_get_interior_vehicle_data_response.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/rc_on_interior_vehicle_data_notification.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/rc_on_remote_control_settings_notification.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/rc_set_interior_vehicle_data_request.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/rc_set_interior_vehicle_data_response.cc"
-  # commands/mobile
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/button_press_request.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/button_press_response.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/get_interior_vehicle_data_request.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/get_interior_vehicle_data_response.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/on_interior_vehicle_data_notification.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/set_interior_vehicle_data_request.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/set_interior_vehicle_data_response.cc"
-  )
+    PLUGIN_SOURCES
+    "${CMAKE_CURRENT_LIST_DIR}/src/interior_data_cache_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/interior_data_manager_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/rc_app_extension.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/rc_command_factory.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/rc_helpers.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/rc_rpc_plugin.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/resource_allocation_manager_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/rc_command_request.cc"
+    # commands/hmi
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/rc_button_press_request.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/rc_button_press_response.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/rc_get_interior_vehicle_data_consent_request.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/rc_get_interior_vehicle_data_consent_response.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/rc_get_interior_vehicle_data_request.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/rc_get_interior_vehicle_data_response.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/rc_on_interior_vehicle_data_notification.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/rc_on_remote_control_settings_notification.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/rc_set_interior_vehicle_data_request.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/rc_set_interior_vehicle_data_response.cc"
+    # commands/mobile
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/button_press_request.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/button_press_response.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/get_interior_vehicle_data_request.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/get_interior_vehicle_data_response.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/on_interior_vehicle_data_notification.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/set_interior_vehicle_data_request.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/set_interior_vehicle_data_response.cc"
+    
+)
 
 add_dynamic_library(${PROJECT_NAME})
 
 if(BUILD_TESTS)
-  add_static_library(${PROJECT_NAME})
-  add_subdirectory(test)
+    add_static_library(${PROJECT_NAME})
+    add_subdirectory(test)
 endif()

@@ -30,19 +30,23 @@ file(COPY smartDeviceLink_test.ini DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 file(COPY
      smartDeviceLink_invalid_pairs.ini
      DESTINATION
-     ${CMAKE_CURRENT_BINARY_DIR})
+     ${CMAKE_CURRENT_BINARY_DIR}
+)
 file(COPY
      smartDeviceLink_invalid_string.ini
      DESTINATION
-     ${CMAKE_CURRENT_BINARY_DIR})
+     ${CMAKE_CURRENT_BINARY_DIR}
+)
 file(COPY
      smartDeviceLink_invalid_int.ini
      DESTINATION
-     ${CMAKE_CURRENT_BINARY_DIR})
+     ${CMAKE_CURRENT_BINARY_DIR}
+)
 file(COPY
      smartDeviceLink_invalid_boolean.ini
      DESTINATION
-     ${CMAKE_CURRENT_BINARY_DIR})
+     ${CMAKE_CURRENT_BINARY_DIR}
+)
 
 project(config_profile_test)
 create_test(${PROJECT_NAME})
@@ -50,8 +54,10 @@ create_test(${PROJECT_NAME})
 target_sources(${PROJECT_NAME}
                PRIVATE
                ${CMAKE_CURRENT_SOURCE_DIR}/ini_file_test.cc
-               ${CMAKE_CURRENT_SOURCE_DIR}/profile_test.cc)
+               ${CMAKE_CURRENT_SOURCE_DIR}/profile_test.cc
+)
 
 target_link_libraries(${PROJECT_NAME}
                       PRIVATE config_profile::config_profile
-                              components::interface)
+                              components::interface
+)

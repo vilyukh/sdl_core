@@ -35,18 +35,21 @@ target_sources(${PROJECT_NAME}
                "${CMAKE_CURRENT_LIST_DIR}/src/connection_handler_impl.cc"
                "${CMAKE_CURRENT_LIST_DIR}/src/connection.cc"
                "${CMAKE_CURRENT_LIST_DIR}/src/device.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/heartbeat_monitor.cc")
+               "${CMAKE_CURRENT_LIST_DIR}/src/heartbeat_monitor.cc"
+)
 
 target_link_libraries(${PROJECT_NAME}
                       PUBLIC encryption::encryption
                              protocol::protocol
                              utils::utils
                              protocol_handler::protocol_handler
-                      PRIVATE components::interface)
+                      PRIVATE components::interface
+)
 
 target_include_directories(${PROJECT_NAME}
-                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include")
+                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
+)
 
 if(BUILD_TESTS)
-  add_subdirectory(test)
+    add_subdirectory(test)
 endif()

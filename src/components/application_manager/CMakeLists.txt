@@ -35,80 +35,82 @@ add_library(${PROJECT_NAME}_INTERFACE INTERFACE)
 add_library(${PROJECT_NAME}::interface ALIAS ${PROJECT_NAME}_INTERFACE)
 
 target_include_directories(${PROJECT_NAME}_INTERFACE
-                           INTERFACE "${CMAKE_CURRENT_LIST_DIR}/include")
+                           INTERFACE "${CMAKE_CURRENT_LIST_DIR}/include"
+)
 
 add_library(${PROJECT_NAME} STATIC)
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 target_sources(
-  ${PROJECT_NAME} PRIVATE
-  # app_launch
-  "${CMAKE_CURRENT_LIST_DIR}/src/app_launch/app_launch_ctrl_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/app_launch/app_launch_data_db.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/app_launch/app_launch_data_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/app_launch/app_launch_data_json.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/app_launch/app_launch_sql_queries.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/app_launch/apps_launcher.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/app_launch/device_apps_launcher.cc"
-  # commands
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/command_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/command_notification_from_mobile_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/command_notification_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/command_request_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/command_response_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/notification_from_hmi.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/notification_to_hmi.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/pending.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/request_from_hmi.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/request_to_hmi.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/response_from_hmi.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/response_to_hmi.cc"
-  # event_engine
-  "${CMAKE_CURRENT_LIST_DIR}/src/event_engine/event.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/event_engine/event_dispatcher_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/event_engine/event_observer.cc"
-  # helpers
-  "${CMAKE_CURRENT_LIST_DIR}/src/helpers/application_helper.cc"
-  # message_helper
-  "${CMAKE_CURRENT_LIST_DIR}/src/message_helper/message_helper.cc"
-  # plugin_manager
-  "${CMAKE_CURRENT_LIST_DIR}/src/plugin_manager/rpc_plugin_manager_impl.cc"
-  # policies
-  "${CMAKE_CURRENT_LIST_DIR}/src/policies/policy_event_observer.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/policies/policy_handler.cc"
-  # "${CMAKE_CURRENT_LIST_DIR}/src/policies/policy_retry_sequence.cc"
-  # policy/delegates
-  "${CMAKE_CURRENT_LIST_DIR}/src/policies/delegates/app_permission_delegate.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/policies/delegates/statistics_delegate.cc"
-  # resumption
-  "${CMAKE_CURRENT_LIST_DIR}/src/resumption/resume_ctrl_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/resumption/resumption_data.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/resumption/resumption_data_db.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/resumption/resumption_data_json.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/resumption/resumption_sql_queries.cc"
-  # system_time
-  "${CMAKE_CURRENT_LIST_DIR}/src/system_time/system_time_handler_impl.cc"
-  # application_manager
-  "${CMAKE_CURRENT_LIST_DIR}/src/application_data_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/application_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/application_manager_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/application_state.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/command_holder_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/hmi_capabilities_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/hmi_interfaces_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/hmi_language_handler.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/hmi_state.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/message.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/mobile_message_handler.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/request_controller.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/request_info.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/request_tracker.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/rpc_handler_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/rpc_service_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/smart_object_keys.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/state_controller_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/usage_statistics.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/help_prompt_manager_impl")
+    ${PROJECT_NAME} PRIVATE
+    # app_launch
+    "${CMAKE_CURRENT_LIST_DIR}/src/app_launch/app_launch_ctrl_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/app_launch/app_launch_data_db.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/app_launch/app_launch_data_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/app_launch/app_launch_data_json.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/app_launch/app_launch_sql_queries.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/app_launch/apps_launcher.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/app_launch/device_apps_launcher.cc"
+    # commands
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/command_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/command_notification_from_mobile_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/command_notification_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/command_request_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/command_response_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/notification_from_hmi.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/notification_to_hmi.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/pending.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/request_from_hmi.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/request_to_hmi.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/response_from_hmi.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/response_to_hmi.cc"
+    # event_engine
+    "${CMAKE_CURRENT_LIST_DIR}/src/event_engine/event.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/event_engine/event_dispatcher_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/event_engine/event_observer.cc"
+    # helpers
+    "${CMAKE_CURRENT_LIST_DIR}/src/helpers/application_helper.cc"
+    # message_helper
+    "${CMAKE_CURRENT_LIST_DIR}/src/message_helper/message_helper.cc"
+    # plugin_manager
+    "${CMAKE_CURRENT_LIST_DIR}/src/plugin_manager/rpc_plugin_manager_impl.cc"
+    # policies
+    "${CMAKE_CURRENT_LIST_DIR}/src/policies/policy_event_observer.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/policies/policy_handler.cc"
+    # "${CMAKE_CURRENT_LIST_DIR}/src/policies/policy_retry_sequence.cc"
+    # policy/delegates
+    "${CMAKE_CURRENT_LIST_DIR}/src/policies/delegates/app_permission_delegate.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/policies/delegates/statistics_delegate.cc"
+    # resumption
+    "${CMAKE_CURRENT_LIST_DIR}/src/resumption/resume_ctrl_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/resumption/resumption_data.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/resumption/resumption_data_db.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/resumption/resumption_data_json.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/resumption/resumption_sql_queries.cc"
+    # system_time
+    "${CMAKE_CURRENT_LIST_DIR}/src/system_time/system_time_handler_impl.cc"
+    # application_manager
+    "${CMAKE_CURRENT_LIST_DIR}/src/application_data_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/application_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/application_manager_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/application_state.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/command_holder_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/hmi_capabilities_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/hmi_interfaces_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/hmi_language_handler.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/hmi_state.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/message.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/mobile_message_handler.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/request_controller.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/request_info.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/request_tracker.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/rpc_handler_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/rpc_service_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/smart_object_keys.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/state_controller_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/usage_statistics.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/help_prompt_manager_impl"
+)
 
 sdl_find_package(BSON REQUIRED)
 
@@ -124,18 +126,21 @@ target_link_libraries(${PROJECT_NAME}
                              Policy::Policy
                              Policy::usage_statistics
                              BSON::BSON
-                      PRIVATE components::interface)
+                      PRIVATE components::interface
+)
 
 if(TELEMETRY_MONITOR)
-  target_link_libraries(${PROJECT_NAME}
-                        PUBLIC telemetry_monitor::telemetry_monitor)
+    target_link_libraries(${PROJECT_NAME}
+                          PUBLIC telemetry_monitor::telemetry_monitor
+)
 endif()
 
 target_include_directories(${PROJECT_NAME}
-                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include")
+                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
+)
 
 add_subdirectory(rpc_plugins)
 
 if(BUILD_TESTS)
-  add_subdirectory(test)
+    add_subdirectory(test)
 endif()

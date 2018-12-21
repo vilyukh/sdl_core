@@ -35,10 +35,12 @@ add_library(${PROJECT_NAME}::${TARGET_NAME} ALIAS ${TARGET_NAME})
 generate_interface("${CMAKE_CURRENT_SOURCE_DIR}/v4_protocol_v1_2_no_extra.xml"
                    "ns_smart_device_link_rpc::V1"
                    "sdlrpcv1"
-                   ${TARGET_NAME})
+                   ${TARGET_NAME}
+)
 target_link_libraries(${TARGET_NAME}
                       PUBLIC smart_objects::smart_objects formatters::formatters
-                      PRIVATE components::interface)
+                      PRIVATE components::interface
+)
 
 set(TARGET_NAME MOBILE_API)
 add_library(${TARGET_NAME} STATIC)
@@ -46,35 +48,41 @@ add_library(${PROJECT_NAME}::${TARGET_NAME} ALIAS ${TARGET_NAME})
 generate_interface("${CMAKE_CURRENT_SOURCE_DIR}/MOBILE_API.xml"
                    "mobile_apis"
                    "sdlrpcv2"
-                   ${TARGET_NAME})
+                   ${TARGET_NAME}
+)
 target_link_libraries(${TARGET_NAME}
                       PUBLIC smart_objects::smart_objects formatters::formatters
-                      PRIVATE components::interface)
+                      PRIVATE components::interface
+)
 
 if(HMI_JSON_API)
-  set(TARGET_NAME HMI_API)
-  add_library(${TARGET_NAME} STATIC)
-  add_library(${PROJECT_NAME}::${TARGET_NAME} ALIAS ${TARGET_NAME})
-  generate_interface("${CMAKE_CURRENT_SOURCE_DIR}/HMI_API.xml"
-                     "hmi_apis"
-                     "jsonrpc"
-                     ${TARGET_NAME})
-  target_link_libraries(${TARGET_NAME}
-                        PUBLIC smart_objects::smart_objects
-                               formatters::formatters
-                        PRIVATE components::interface)
+    set(TARGET_NAME HMI_API)
+    add_library(${TARGET_NAME} STATIC)
+    add_library(${PROJECT_NAME}::${TARGET_NAME} ALIAS ${TARGET_NAME})
+    generate_interface("${CMAKE_CURRENT_SOURCE_DIR}/HMI_API.xml"
+                       "hmi_apis"
+                       "jsonrpc"
+                       ${TARGET_NAME}
+)
+    target_link_libraries(${TARGET_NAME}
+                          PUBLIC smart_objects::smart_objects
+                                 formatters::formatters
+                          PRIVATE components::interface
+)
 endif()
 
 if(HMI_DBUS_API)
-  set(TARGET_NAME HMI_API)
-  add_library(${TARGET_NAME} STATIC)
-  add_library(${PROJECT_NAME}::${TARGET_NAME} ALIAS ${TARGET_NAME})
-  generate_interface("${CMAKE_CURRENT_SOURCE_DIR}/QT_HMI_API.xml"
-                     "hmi_apis"
-                     "jsonrpc"
-                     ${TARGET_NAME})
-  target_link_libraries(${TARGET_NAME}
-                        PUBLIC smart_objects::smart_objects
-                               formatters::formatters
-                        PRIVATE components::interface)
+    set(TARGET_NAME HMI_API)
+    add_library(${TARGET_NAME} STATIC)
+    add_library(${PROJECT_NAME}::${TARGET_NAME} ALIAS ${TARGET_NAME})
+    generate_interface("${CMAKE_CURRENT_SOURCE_DIR}/QT_HMI_API.xml"
+                       "hmi_apis"
+                       "jsonrpc"
+                       ${TARGET_NAME}
+)
+    target_link_libraries(${TARGET_NAME}
+                          PUBLIC smart_objects::smart_objects
+                                 formatters::formatters
+                          PRIVATE components::interface
+)
 endif()

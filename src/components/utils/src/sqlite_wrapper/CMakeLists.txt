@@ -34,8 +34,10 @@ target_sources(${target_name}
                PRIVATE
                "${CMAKE_CURRENT_LIST_DIR}/sql_database.cc"
                "${CMAKE_CURRENT_LIST_DIR}/sql_error.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/sql_query.cc")
+               "${CMAKE_CURRENT_LIST_DIR}/sql_query.cc"
+)
 
 target_link_libraries(${target_name}
                       PUBLIC utils::utils sqlite3
-                      PRIVATE components::interface)
+                      PRIVATE components::interface
+)

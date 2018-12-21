@@ -38,7 +38,8 @@ target_sources(${PROJECT_NAME}
                "${CMAKE_CURRENT_LIST_DIR}/src/crypto_manager_impl.cc"
                "${CMAKE_CURRENT_LIST_DIR}/src/security_manager_impl.cc"
                "${CMAKE_CURRENT_LIST_DIR}/src/security_query.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/ssl_context_impl.cc")
+               "${CMAKE_CURRENT_LIST_DIR}/src/ssl_context_impl.cc"
+)
 
 target_link_libraries(${PROJECT_NAME}
                       PUBLIC utils::utils
@@ -47,11 +48,13 @@ target_link_libraries(${PROJECT_NAME}
                              OpenSSL::Crypto
                              OpenSSL::SSL
                              jsoncpp::jsoncpp
-                      PRIVATE components::interface)
+                      PRIVATE components::interface
+)
 
 target_include_directories(${PROJECT_NAME}
-                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include")
+                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
+)
 
 if(BUILD_TESTS)
-  add_subdirectory(test)
+    add_subdirectory(test)
 endif()

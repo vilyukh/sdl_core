@@ -7,7 +7,9 @@ target_sources(${target_name} PRIVATE "${CMAKE_CURRENT_LIST_DIR}/counter.cc")
 
 target_link_libraries(${target_name}
                       PUBLIC utils::utils
-                      PRIVATE components::interface)
+                      PRIVATE components::interface
+)
 
 target_include_directories(${target_name}
-                           PUBLIC "${${PROJECT_NAME}_INCLUDE_DIR}")
+                           PUBLIC "${${PROJECT_NAME}_INCLUDE_DIR}"
+)

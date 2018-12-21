@@ -26,5 +26,5 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 if(ENABLE_LOG)
-  add_subdirectory(appenders)
+    add_subdirectory(appenders)
 endif()

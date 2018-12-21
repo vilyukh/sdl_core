@@ -30,27 +30,34 @@ create_test(${PROJECT_NAME})
 
 target_include_directories(${PROJECT_NAME}
                            PRIVATE ${COMPONENTS_DIR}/include/test
-                                   ${APPLICATION_MANAGER_DIR}/test/include/)
+                                   ${APPLICATION_MANAGER_DIR}/test/include/
+)
 
-target_sources(${PROJECT_NAME} PRIVATE
-               ${CMAKE_CURRENT_SOURCE_DIR}/app_launch_ctrl_test.cc)
+target_sources(${PROJECT_NAME}
+               PRIVATE
+               ${CMAKE_CURRENT_SOURCE_DIR}/app_launch_ctrl_test.cc
+)
 
 target_link_libraries(${PROJECT_NAME}
                       PRIVATE application_manager::application_manager
-                              components::interface)
+                              components::interface
+)
 
 project(app_launch_data_test)
 create_test(${PROJECT_NAME})
 
 target_include_directories(${PROJECT_NAME}
                            PRIVATE ${COMPONENTS_DIR}/include/test
-                                   ${APPLICATION_MANAGER_DIR}/test/include/)
+                                   ${APPLICATION_MANAGER_DIR}/test/include/
+)
 
 target_sources(${PROJECT_NAME}
                PRIVATE
                ${CMAKE_CURRENT_SOURCE_DIR}/app_launch_data_db_test.cc
-               ${CMAKE_CURRENT_SOURCE_DIR}/app_launch_data_json_test.cc)
+               ${CMAKE_CURRENT_SOURCE_DIR}/app_launch_data_json_test.cc
+)
 
 target_link_libraries(${PROJECT_NAME}
                       PRIVATE application_manager::application_manager
-                              components::interface)
+                              components::interface
+)

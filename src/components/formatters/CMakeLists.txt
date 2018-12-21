@@ -38,16 +38,20 @@ target_sources(${PROJECT_NAME}
                "${CMAKE_CURRENT_LIST_DIR}/src/CSmartFactory.cc"
                "${CMAKE_CURRENT_LIST_DIR}/src/formatter_json_rpc.cc"
                "${CMAKE_CURRENT_LIST_DIR}/src/generic_json_formatter.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/meta_formatter.cc")
+               "${CMAKE_CURRENT_LIST_DIR}/src/meta_formatter.cc"
+)
 
 target_link_libraries(${PROJECT_NAME}
-                      PUBLIC smart_objects::smart_objects utils::utils
+                      PUBLIC smart_objects::smart_objects
+                             utils::utils
                              jsoncpp::jsoncpp
-                      PRIVATE components::interface)
+                      PRIVATE components::interface
+)
 
 target_include_directories(${PROJECT_NAME}
-                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include")
+                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
+)
 
 if(BUILD_TESTS)
-  add_subdirectory(test)
+    add_subdirectory(test)
 endif()

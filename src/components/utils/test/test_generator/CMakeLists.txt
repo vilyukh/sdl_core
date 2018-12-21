@@ -37,7 +37,8 @@ add_custom_target(generate_version
                   COMMAND ${INTEFRACE_GENERATOR_CMD} ${XML_NAME} "mobile_apis"
                           ${CMAKE_CURRENT_BINARY_DIR} "--parser-type" "sdlrpcv2"
                   DEPENDS ${INTERFACE_GENERATOR_DEPENDENCIES} ${XML_NAME}
-                  VERBATIM)
+                  VERBATIM
+)
 
 set(SOURCES generated_msg_version_test.cc)
 

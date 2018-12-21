@@ -29,9 +29,10 @@ project(security_manager_test)
 create_test(${PROJECT_NAME})
 
 target_include_directories(
-  ${PROJECT_NAME}
-  PRIVATE ${COMPONENTS_DIR}/protocol_handler/test/include
-          ${COMPONENTS_DIR}/transport_manager/test/include)
+    ${PROJECT_NAME}
+    PRIVATE ${COMPONENTS_DIR}/protocol_handler/test/include
+            ${COMPONENTS_DIR}/transport_manager/test/include
+)
 
 collect_sources(SOURCES "${CMAKE_CURRENT_SOURCE_DIR}")
 
@@ -39,18 +40,20 @@ target_sources(${PROJECT_NAME} PRIVATE ${SOURCES})
 
 target_link_libraries(${PROJECT_NAME}
                       PRIVATE security_manager::security_manager
-                              components::interface)
+                              components::interface
+)
 
 set(CERT_LIST ${CMAKE_SOURCE_DIR}/mycert.pem ${CMAKE_SOURCE_DIR}/mykey.pem)
 
 add_custom_target(
-  generate_certificates
-  COMMAND ${CMAKE_SOURCE_DIR}/tools/Utils/generate_test_certificates.py
-          -d=${CMAKE_CURRENT_BINARY_DIR} -s
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+    generate_certificates
+    COMMAND ${CMAKE_SOURCE_DIR}/tools/Utils/generate_test_certificates.py
+            -d=${CMAKE_CURRENT_BINARY_DIR} -s
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+)
 
 foreach(CERT_ENTRY ${CERT_LIST})
-  file(COPY ${CERT_ENTRY} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+    file(COPY ${CERT_ENTRY} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 endforeach()
 
 add_dependencies(security_manager_test generate_certificates)

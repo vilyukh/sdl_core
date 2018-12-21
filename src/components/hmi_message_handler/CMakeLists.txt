@@ -33,22 +33,26 @@ add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 target_sources(${PROJECT_NAME}
                PRIVATE
                "${CMAKE_CURRENT_LIST_DIR}/src/hmi_message_adapter_impl.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/hmi_message_handler_impl.cc")
+               "${CMAKE_CURRENT_LIST_DIR}/src/hmi_message_handler_impl.cc"
+)
 
 target_sources(${PROJECT_NAME}
                PRIVATE
                "${CMAKE_CURRENT_LIST_DIR}/src/mb_controller.cc"
                "${CMAKE_CURRENT_LIST_DIR}/src/messagebroker_adapter.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/websocket_session.cc")
+               "${CMAKE_CURRENT_LIST_DIR}/src/websocket_session.cc"
+)
 
 target_link_libraries(${PROJECT_NAME}
                       PUBLIC utils::utils
                              application_manager::application_manager
-                      PRIVATE components::interface)
+                      PRIVATE components::interface
+)
 
 target_include_directories(${PROJECT_NAME}
-                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include")
+                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
+)
 
 if(BUILD_TESTS)
-  add_subdirectory(test)
+    add_subdirectory(test)
 endif()

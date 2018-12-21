@@ -16,7 +16,8 @@ target_sources(${PROJECT_NAME}
                "${CMAKE_CURRENT_LIST_DIR}/src/sql_pt_queries.cc"
                "${CMAKE_CURRENT_LIST_DIR}/src/sql_pt_representation.cc"
                "${CMAKE_CURRENT_LIST_DIR}/src/status.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/update_status_manager.cc")
+               "${CMAKE_CURRENT_LIST_DIR}/src/update_status_manager.cc"
+)
 
 target_link_libraries(${PROJECT_NAME}
                       PUBLIC jsoncpp::jsoncpp
@@ -24,14 +25,16 @@ target_link_libraries(${PROJECT_NAME}
                              utils::dbms
                              config_profile::config_profile
                              Policy::policy_table
-                      PRIVATE components::interface)
+                      PRIVATE components::interface
+)
 
 if(ENABLE_HMI_PTU_DECRYPTION)
-  target_compile_definitions(${PROJECT_NAME} PUBLIC USE_HMI_PTU_DECRYPTION)
+    target_compile_definitions(${PROJECT_NAME} PUBLIC USE_HMI_PTU_DECRYPTION)
 endif()
 
 target_include_directories(${PROJECT_NAME}
-                           PUBLIC "${${PROJECT_NAME}_INCLUDE_DIR}")
+                           PUBLIC "${${PROJECT_NAME}_INCLUDE_DIR}"
+)
 
 install(TARGETS ${PROJECT_NAME}
         DESTINATION "${CMAKE_INSTALL_LIBDIR}"
@@ -44,11 +47,12 @@ install(TARGETS ${PROJECT_NAME}
         GROUP_READ
         GROUP_EXECUTE
         WORLD_READ
-        WORLD_EXECUTE)
+        WORLD_EXECUTE
+)
 
 add_subdirectory(src/policy_table)
 add_subdirectory(src/usage_statistics)
 
 if(BUILD_TESTS)
-  add_subdirectory(test)
+    add_subdirectory(test)
 endif()

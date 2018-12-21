@@ -42,16 +42,19 @@ target_sources(${PROJECT_NAME}
                "${CMAKE_CURRENT_LIST_DIR}/src/schema_item.cc"
                "${CMAKE_CURRENT_LIST_DIR}/src/smart_object.cc"
                "${CMAKE_CURRENT_LIST_DIR}/src/smart_schema.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/string_schema_item.cc")
+               "${CMAKE_CURRENT_LIST_DIR}/src/string_schema_item.cc"
+)
 
 target_link_libraries(${PROJECT_NAME}
                       PUBLIC rpc_base::rpc_base utils::utils
-                      PRIVATE components::interface)
+                      PRIVATE components::interface
+)
 
 target_include_directories(${PROJECT_NAME}
                            PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
-                           PUBLIC "${COMPONENTS_DIR}/include")
+                           PUBLIC "${COMPONENTS_DIR}/include"
+)
 
 if(BUILD_TESTS)
-  add_subdirectory(test)
+    add_subdirectory(test)
 endif()

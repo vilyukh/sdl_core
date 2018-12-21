@@ -31,17 +31,23 @@ project(hmi_message_handler_test)
 create_test(${PROJECT_NAME})
 
 target_include_directories(
-  ${PROJECT_NAME}
-  PRIVATE ${COMPONENTS_DIR}/hmi_message_handler/test/include)
+    ${PROJECT_NAME}
+    PRIVATE ${COMPONENTS_DIR}/hmi_message_handler/test/include
+)
 
-target_sources(${PROJECT_NAME} PRIVATE
-               ${CMAKE_CURRENT_SOURCE_DIR}/hmi_message_handler_impl_test.cc)
+target_sources(${PROJECT_NAME}
+               PRIVATE
+               ${CMAKE_CURRENT_SOURCE_DIR}/hmi_message_handler_impl_test.cc
+)
 
 if(HMIADAPTER STREQUAL "messagebroker")
-  target_sources(${PROJECT_NAME} PRIVATE
-                 ${CMAKE_CURRENT_SOURCE_DIR}/hmi_message_handler_impl_test.cc)
+    target_sources(${PROJECT_NAME}
+                   PRIVATE
+                   ${CMAKE_CURRENT_SOURCE_DIR}/hmi_message_handler_impl_test.cc
+)
 endif()
 
 target_link_libraries(${PROJECT_NAME}
                       PRIVATE hmi_message_handler::hmi_message_handler
-                              components::interface)
+                              components::interface
+)

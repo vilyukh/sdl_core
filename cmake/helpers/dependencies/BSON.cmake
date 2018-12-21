@@ -31,12 +31,13 @@ fetchcontent_declare(BSON
                      GIT_REPOSITORY
                      https://github.com/BSolonenko/bson_c_lib.git
                      GIT_TAG
-                     topic/sdl_rework)
+                     topic/sdl_rework
+)
 
 fetchcontent_getproperties(BSON)
 if(NOT bson_POPULATED)
-  fetchcontent_populate(BSON)
-  add_subdirectory("${bson_SOURCE_DIR}" "${bson_BINARY_DIR}")
+    fetchcontent_populate(BSON)
+    add_subdirectory("${bson_SOURCE_DIR}" "${bson_BINARY_DIR}")
 endif()
 
 set(BSON_FOUND ON)

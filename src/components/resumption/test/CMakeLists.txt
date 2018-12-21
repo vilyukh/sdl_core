@@ -28,8 +28,11 @@
 project(resumption_test)
 create_test(${PROJECT_NAME})
 
-target_sources(${PROJECT_NAME} PRIVATE
-               ${CMAKE_CURRENT_SOURCE_DIR}/last_state_test.cc)
+target_sources(${PROJECT_NAME}
+               PRIVATE
+               ${CMAKE_CURRENT_SOURCE_DIR}/last_state_test.cc
+)
 
 target_link_libraries(${PROJECT_NAME}
-                      PRIVATE resumption::resumption components::interface)
+                      PRIVATE resumption::resumption components::interface
+)

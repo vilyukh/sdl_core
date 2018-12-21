@@ -28,13 +28,17 @@
 project(message_helper_test)
 create_test(${PROJECT_NAME})
 
-target_sources(${PROJECT_NAME} PRIVATE
-               ${CMAKE_CURRENT_SOURCE_DIR}/message_helper_test.cc)
+target_sources(${PROJECT_NAME}
+               PRIVATE
+               ${CMAKE_CURRENT_SOURCE_DIR}/message_helper_test.cc
+)
 
 target_include_directories(${PROJECT_NAME}
                            PRIVATE ${POLICY_MOCK_INCLUDE_PATH}
-                                   ${APPLICATION_MANAGER_DIR}/test/include/)
+                                   ${APPLICATION_MANAGER_DIR}/test/include/
+)
 
 target_link_libraries(${PROJECT_NAME}
                       PRIVATE application_manager::application_manager
-                              components::interface)
+                              components::interface
+)

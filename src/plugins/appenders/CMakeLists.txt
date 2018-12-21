@@ -36,11 +36,13 @@ add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 target_sources(${PROJECT_NAME}
                PRIVATE
                "${CMAKE_CURRENT_LIST_DIR}/src/safe_file_appender.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/safe_rolling_file_appender.cc")
+               "${CMAKE_CURRENT_LIST_DIR}/src/safe_rolling_file_appender.cc"
+)
 
 target_include_directories(${PROJECT_NAME}
                            PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
-                                  "${THIRD_PARTY_INSTALL_PREFIX}/include")
+                                  "${THIRD_PARTY_INSTALL_PREFIX}/include"
+)
 
 sdl_find_package(log4cxx REQUIRED)
 
@@ -57,4 +59,5 @@ install(TARGETS ${PROJECT_NAME}
         GROUP_READ
         GROUP_EXECUTE
         WORLD_READ
-        WORLD_EXECUTE)
+        WORLD_EXECUTE
+)

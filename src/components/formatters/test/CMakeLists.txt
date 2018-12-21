@@ -29,7 +29,8 @@ project(formatters_test)
 create_test(${PROJECT_NAME})
 
 target_include_directories(${PROJECT_NAME}
-                           PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+                           PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
 
 target_sources(${PROJECT_NAME}
                PRIVATE
@@ -42,10 +43,12 @@ target_sources(${PROJECT_NAME}
                ${CMAKE_CURRENT_SOURCE_DIR}/meta_formatter_test.cc
                ${CMAKE_CURRENT_SOURCE_DIR}/src/create_smartSchema.cc
                ${CMAKE_CURRENT_SOURCE_DIR}/src/meta_formatter_test_helper.cc
-               ${CMAKE_CURRENT_SOURCE_DIR}/src/SmartFactoryTestHelper.cc)
+               ${CMAKE_CURRENT_SOURCE_DIR}/src/SmartFactoryTestHelper.cc
+)
 
 target_link_libraries(${PROJECT_NAME}
                       PRIVATE formatters::formatters
                               components::interface
                               interfaces::HMI_API
-                              interfaces::MOBILE_API)
+                              interfaces::MOBILE_API
+)

@@ -36,11 +36,14 @@ target_sources(${PROJECT_NAME}
                "${CMAKE_CURRENT_LIST_DIR}/src/message_priority.cc"
                "${CMAKE_CURRENT_LIST_DIR}/src/raw_message.cc"
                "${CMAKE_CURRENT_LIST_DIR}/src/rpc_type.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/service_type.cc")
+               "${CMAKE_CURRENT_LIST_DIR}/src/service_type.cc"
+)
 
 target_link_libraries(${PROJECT_NAME}
                       PUBLIC utils::utils
-                      PRIVATE components::interface)
+                      PRIVATE components::interface
+)
 
 target_include_directories(${PROJECT_NAME}
-                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include")
+                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
+)

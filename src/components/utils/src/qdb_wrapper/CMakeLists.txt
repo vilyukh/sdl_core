@@ -35,15 +35,18 @@ target_sources(${target_name}
                PRIVATE
                "${CMAKE_CURRENT_LIST_DIR}/sql_database.cc"
                "${CMAKE_CURRENT_LIST_DIR}/sql_error.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/sql_query.cc")
+               "${CMAKE_CURRENT_LIST_DIR}/sql_query.cc"
+)
 
 target_link_libraries(${target_name}
                       PUBLIC qdb utils::utils
-                      PRIVATE components::interface)
+                      PRIVATE components::interface
+)
 
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/policy.ini"
         DESTINATION "${CMAKE_INSTALL_SYSCONFDIR}/AppLink"
-        COMPONENT sdl_core)
+        COMPONENT sdl_core
+)
 
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/qdbserver.sh"
         DESTINATION "${CMAKE_INSTALL_BINDIR}"
@@ -56,4 +59,5 @@ install(FILES "${CMAKE_CURRENT_LIST_DIR}/qdbserver.sh"
         GROUP_READ
         GROUP_EXECUTE
         WORLD_READ
-        WORLD_EXECUTE)
+        WORLD_EXECUTE
+)
