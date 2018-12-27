@@ -5,27 +5,30 @@ if(CMAKE_HOST_LINUX)
     set(HOST_EXECUTABLE_SUFFIX "")
 endif(CMAKE_HOST_LINUX)
 
-find_path(QNX_HOST
-          NAME
-          usr/bin/qcc${HOST_EXECUTABLE_SUFFIX}
-          PATHS $ENV{QNX_HOST}
-          NO_CMAKE_PATH NO_CMAKE_ENVIRONMENT_PATH
+find_path(
+    QNX_HOST
+    NAME
+    usr/bin/qcc${HOST_EXECUTABLE_SUFFIX}
+    PATHS $ENV{QNX_HOST}
+    NO_CMAKE_PATH NO_CMAKE_ENVIRONMENT_PATH
 )
 
-find_path(QNX_TARGET
-          NAME
-          usr/include/qnx_errno.h
-          PATHS $ENV{QNX_TARGET}
-          NO_CMAKE_PATH NO_CMAKE_ENVIRONMENT_PATH
+find_path(
+    QNX_TARGET
+    NAME
+    usr/include/qnx_errno.h
+    PATHS $ENV{QNX_TARGET}
+    NO_CMAKE_PATH NO_CMAKE_ENVIRONMENT_PATH
 )
 
 if(CMAKE_HOST_LINUX)
-    find_path(QNX_CONFIGURATION
-              NAME
-              /etc/qnx/bin/qnxactivate
-              PATHS $ENV{QNX_CONFIGURATION} "$ENV{QNX_HOST}/usr/bin/qconfig"
-              NO_CMAKE_PATH NO_CMAKE_ENVIRONMENT_PATH
-)
+    find_path(
+        QNX_CONFIGURATION
+        NAME
+        /etc/qnx/bin/qnxactivate
+        PATHS $ENV{QNX_CONFIGURATION} "$ENV{QNX_HOST}/usr/bin/qconfig"
+        NO_CMAKE_PATH NO_CMAKE_ENVIRONMENT_PATH
+    )
 endif(CMAKE_HOST_LINUX)
 
 set(ENV{QNX_HOST} ${QNX_HOST})
@@ -35,10 +38,12 @@ if(CMAKE_HOST_LINUX)
     set(ENV{PATH} "$ENV{PATH};${QNX_HOST}/usr/bin")
 endif(CMAKE_HOST_LINUX)
 
-set(CMAKE_MAKE_PROGRAM "${QNX_HOST}/usr/bin/make${HOST_EXECUTABLE_SUFFIX}"
+set(
+    CMAKE_MAKE_PROGRAM "${QNX_HOST}/usr/bin/make${HOST_EXECUTABLE_SUFFIX}"
     CACHE PATH "QNX Make Program"
 )
-set(CMAKE_SH "${QNX_HOST}/usr/bin/sh${HOST_EXECUTABLE_SUFFIX}"
+set(
+    CMAKE_SH "${QNX_HOST}/usr/bin/sh${HOST_EXECUTABLE_SUFFIX}"
     CACHE PATH "QNX shell Program"
 )
 set(
@@ -66,7 +71,8 @@ set(
     "${QNX_HOST}/usr/bin/nto${CMAKE_SYSTEM_PROCESSOR}-objdump${HOST_EXECUTABLE_SUFFIX}"
     CACHE PATH "QNX objdump Program"
 )
-set(CMAKE_LINKER "${QNX_HOST}/usr/bin/nto${CMAKE_SYSTEM_PROCESSOR}-ld"
+set(
+    CMAKE_LINKER "${QNX_HOST}/usr/bin/nto${CMAKE_SYSTEM_PROCESSOR}-ld"
     CACHE PATH "QNX Linker Program"
 )
 set(
@@ -78,7 +84,6 @@ set(
 set(
     CMAKE_C_COMPILER
     ${QNX_HOST}/usr/bin/nto${CMAKE_SYSTEM_PROCESSOR}-gcc${HOST_EXECUTABLE_SUFFIX}
-    
 )
 set(CMAKE_C_FLAGS_DEBUG "-g")
 set(CMAKE_C_FLAGS_MINSIZEREL "-Os -DNDEBUG")
@@ -88,7 +93,6 @@ set(CMAKE_C_FLAGS_RELWITHDEBINFO "-O2 -g")
 set(
     CMAKE_CXX_COMPILER
     ${QNX_HOST}/usr/bin/nto${CMAKE_SYSTEM_PROCESSOR}-c++${HOST_EXECUTABLE_SUFFIX}
-    
 )
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_MINSIZEREL "-Os -DNDEBUG")

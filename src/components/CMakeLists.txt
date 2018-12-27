@@ -31,23 +31,26 @@ project(components)
 add_library(${PROJECT_NAME} INTERFACE)
 add_library(${PROJECT_NAME}::interface ALIAS ${PROJECT_NAME})
 
-target_include_directories(${PROJECT_NAME}
-                           INTERFACE "${CMAKE_CURRENT_LIST_DIR}/include"
+target_include_directories(
+    ${PROJECT_NAME}
+    INTERFACE "${CMAKE_CURRENT_LIST_DIR}/include"
 )
 
 if("${EXTENDED_POLICY}" STREQUAL "EXTERNAL_PROPRIETARY")
     target_include_directories(
         ${PROJECT_NAME}
         INTERFACE "${CMAKE_CURRENT_LIST_DIR}/include/policy/policy_external"
-)
-    target_compile_definitions(${PROJECT_NAME}
-                               INTERFACE
-                               EXTERNAL_PROPRIETARY_MODE
-)
+    )
+    target_compile_definitions(
+        ${PROJECT_NAME}
+        INTERFACE
+        EXTERNAL_PROPRIETARY_MODE
+    )
     set(POLICY_PATH ${COMPONENTS_DIR}/policy/policy_external/)
-    set(POLICY_MOCK_INCLUDE_PATH
+    set(
+        POLICY_MOCK_INCLUDE_PATH
         ${COMPONENTS_DIR}/include/test/policy/policy_external/
-)
+    )
     add_subdirectory(policy/policy_external)
 else()
     if("${EXTENDED_POLICY}" STREQUAL "PROPRIETARY")
@@ -56,11 +59,12 @@ else()
     target_include_directories(
         ${PROJECT_NAME}
         INTERFACE "${COMPONENTS_DIR}/include/policy/policy_regular"
-)
+    )
     set(POLICY_PATH ${COMPONENTS_DIR}/policy/policy_regular/)
-    set(POLICY_MOCK_INCLUDE_PATH
+    set(
+        POLICY_MOCK_INCLUDE_PATH
         ${COMPONENTS_DIR}/include/test/policy/policy_regular/
-)
+    )
     add_subdirectory(policy/policy_regular)
 endif()
 

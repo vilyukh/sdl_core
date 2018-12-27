@@ -27,11 +27,12 @@
 
 include(FetchContent)
 
-fetchcontent_declare(BSON
-                     GIT_REPOSITORY
-                     https://github.com/BSolonenko/bson_c_lib.git
-                     GIT_TAG
-                     topic/sdl_rework
+fetchcontent_declare(
+    BSON
+    GIT_REPOSITORY
+    https://github.com/BSolonenko/bson_c_lib.git
+    GIT_TAG
+    topic/sdl_rework
 )
 
 fetchcontent_getproperties(BSON)

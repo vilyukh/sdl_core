@@ -28,30 +28,36 @@
 project(policy_test)
 create_test(${PROJECT_NAME})
 
-target_include_directories(${PROJECT_NAME}
-                           PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include
-                                   ${POLICY_MOCK_INCLUDE_PATH}/
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include ${POLICY_MOCK_INCLUDE_PATH}/
 )
 
-file(GLOB POLICY_TEST_SOURCES
-          ${CMAKE_CURRENT_SOURCE_DIR}/policy_manager_impl_test_base.cc
-          *.cc
+file(
+    GLOB
+        POLICY_TEST_SOURCES
+        ${CMAKE_CURRENT_SOURCE_DIR}/policy_manager_impl_test_base.cc
+        *.cc
 )
 
 # Unbuildable
-list(REMOVE_ITEM POLICY_TEST_SOURCES
-                 ${CMAKE_CURRENT_SOURCE_DIR}/policy_manager_impl_stress_test.cc
+list(
+    REMOVE_ITEM
+        POLICY_TEST_SOURCES
+        ${CMAKE_CURRENT_SOURCE_DIR}/policy_manager_impl_stress_test.cc
 )
 
 collect_sources(SOURCES "${CMAKE_CURRENT_SOURCE_DIR}")
 
 target_sources(${PROJECT_NAME} PRIVATE ${POLICY_TEST_SOURCES})
 
-target_link_libraries(${PROJECT_NAME}
-                      PRIVATE components::interface
-                              Policy::Policy
-                              Policy::policy_table
-                              Policy::usage_statistics
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE
+        components::interface
+        Policy::Policy
+        Policy::policy_table
+        Policy::usage_statistics
 )
 
 # Additional test files (json)

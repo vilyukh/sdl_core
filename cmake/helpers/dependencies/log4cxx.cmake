@@ -18,9 +18,11 @@ else()
 endif()
 
 add_library(log4cxx::log4cxx UNKNOWN IMPORTED GLOBAL)
-set_target_properties(log4cxx::log4cxx
-                      PROPERTIES INTERFACE_INCLUDE_DIRECTORIES
-                                 "${log4cxx_INCLUDE_DIR}"
-                                 IMPORTED_LOCATION
-                                 "${log4cxx_LIBRARY}"
+set_target_properties(
+    log4cxx::log4cxx
+    PROPERTIES
+        INTERFACE_INCLUDE_DIRECTORIES
+        "${log4cxx_INCLUDE_DIR}"
+        IMPORTED_LOCATION
+        "${log4cxx_LIBRARY}"
 )

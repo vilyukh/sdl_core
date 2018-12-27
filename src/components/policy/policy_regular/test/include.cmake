@@ -30,31 +30,36 @@
 
 set(POLICY_DIR ${CMAKE_SOURCE_DIR}/src/components/policy)
 
-include_directories(${JSONCPP_INCLUDE_DIRECTORY}
-                    ${POLICY_DIR}/test/include
-                    ${POLICY_DIR}/src/policy/include/
-                    ${POLICY_DIR}/src/policy/sqlite_wrapper/include
-                    ${POLICY_DIR}/src/policy/qdb_wrapper/include
-                    ${POLICY_DIR}/src/policy/usage_statistics/include
-                    ${CMAKE_SOURCE_DIR}/src/components/rpc_base/include
-                    ${CMAKE_SOURCE_DIR}/src/components/utils/include/
+include_directories(
+    ${JSONCPP_INCLUDE_DIRECTORY}
+    ${POLICY_DIR}/test/include
+    ${POLICY_DIR}/src/policy/include/
+    ${POLICY_DIR}/src/policy/sqlite_wrapper/include
+    ${POLICY_DIR}/src/policy/qdb_wrapper/include
+    ${POLICY_DIR}/src/policy/usage_statistics/include
+    ${CMAKE_SOURCE_DIR}/src/components/rpc_base/include
+    ${CMAKE_SOURCE_DIR}/src/components/utils/include/
 )
 
-list(APPEND test_exec_libraries
-            Policy
-            UsageStatistics
-            dbms
-            Utils
-            dl
-            ${RTLIB}
+list(
+    APPEND
+        test_exec_libraries
+        Policy
+        UsageStatistics
+        dbms
+        Utils
+        dl
+        ${RTLIB}
 )
 
-list(APPEND testSources
-            ${POLICY_DIR}/test/usage_statistics_test.cc
-            ${POLICY_DIR}/test/generated_code_test.cc
-            ${POLICY_DIR}/test/policy_manager_impl_test.cc
-            # TODO(KKolodiy): need to resolve issue about path to libPolicy.so
-            # ${POLICY_DIR}/test/shared_library_test.cc
+list(
+    APPEND
+        testSources
+        ${POLICY_DIR}/test/usage_statistics_test.cc
+        ${POLICY_DIR}/test/generated_code_test.cc
+        ${POLICY_DIR}/test/policy_manager_impl_test.cc
+        # TODO(KKolodiy): need to resolve issue about path to libPolicy.so
+        # ${POLICY_DIR}/test/shared_library_test.cc
 )
 
 include_directories(${POLICY_DIR}/src/policy/policy_table/table_struct_ext)
@@ -64,45 +69,54 @@ if(CMAKE_SYSTEM_NAME STREQUAL "QNX")
     list(REMOVE_ITEM test_exec_libraries dl)
     # --- Tests for QDB Wrapper
     include_directories(${POLICY_DIR}/src/policy/qdb_wrapper/include)
-    list(APPEND testSources
-                ${POLICY_DIR}/test/qdb_wrapper/sql_database_test.cc
-                ${POLICY_DIR}/test/qdb_wrapper/sql_query_test.cc
-)
-    file(COPY
-         ${POLICY_DIR}/test/qdbserver.sh
-         DESTINATION
-         ${CMAKE_CURRENT_BINARY_DIR}
-)
-    file(COPY
-         ${POLICY_DIR}/test/test-qdb.ini
-         DESTINATION
-         ${CMAKE_CURRENT_BINARY_DIR}
-)
-    file(COPY
-         ${POLICY_DIR}/test/policy.sql
-         DESTINATION
-         ${CMAKE_CURRENT_BINARY_DIR}
-)
+    list(
+        APPEND
+            testSources
+            ${POLICY_DIR}/test/qdb_wrapper/sql_database_test.cc
+            ${POLICY_DIR}/test/qdb_wrapper/sql_query_test.cc
+    )
+    file(
+        COPY
+        ${POLICY_DIR}/test/qdbserver.sh
+        DESTINATION
+        ${CMAKE_CURRENT_BINARY_DIR}
+    )
+    file(
+        COPY
+        ${POLICY_DIR}/test/test-qdb.ini
+        DESTINATION
+        ${CMAKE_CURRENT_BINARY_DIR}
+    )
+    file(
+        COPY
+        ${POLICY_DIR}/test/policy.sql
+        DESTINATION
+        ${CMAKE_CURRENT_BINARY_DIR}
+    )
 else()
     # --- Tests for SQLite Wrapper
     find_package(Sqlite3 REQUIRED)
     include_directories(${POLICY_DIR}/src/policy/sqlite_wrapper/include)
-    list(APPEND testSources
-                ${POLICY_DIR}/test/sqlite_wrapper/sql_database_test.cc
-                ${POLICY_DIR}/test/sqlite_wrapper/sql_query_test.cc
-                ${POLICY_DIR}/test/generated_code_with_sqlite_test.cc
-                ${POLICY_DIR}/test/policy_manager_impl_stress_test.cc
-)
+    list(
+        APPEND
+            testSources
+            ${POLICY_DIR}/test/sqlite_wrapper/sql_database_test.cc
+            ${POLICY_DIR}/test/sqlite_wrapper/sql_query_test.cc
+            ${POLICY_DIR}/test/generated_code_with_sqlite_test.cc
+            ${POLICY_DIR}/test/policy_manager_impl_stress_test.cc
+    )
     list(APPEND test_exec_libraries sqlite3)
 endif()
 
-file(COPY
-     ${POLICY_DIR}/test/valid_sdl_pt_update.json
-     DESTINATION
-     ${CMAKE_CURRENT_BINARY_DIR}
+file(
+    COPY
+    ${POLICY_DIR}/test/valid_sdl_pt_update.json
+    DESTINATION
+    ${CMAKE_CURRENT_BINARY_DIR}
 )
-file(COPY
-     ${POLICY_DIR}/test/sdl_preloaded_pt.json
-     DESTINATION
-     ${CMAKE_CURRENT_BINARY_DIR}
+file(
+    COPY
+    ${POLICY_DIR}/test/sdl_preloaded_pt.json
+    DESTINATION
+    ${CMAKE_CURRENT_BINARY_DIR}
 )

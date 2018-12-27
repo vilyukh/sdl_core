@@ -34,8 +34,9 @@ project(application_manager)
 add_library(${PROJECT_NAME}_INTERFACE INTERFACE)
 add_library(${PROJECT_NAME}::interface ALIAS ${PROJECT_NAME}_INTERFACE)
 
-target_include_directories(${PROJECT_NAME}_INTERFACE
-                           INTERFACE "${CMAKE_CURRENT_LIST_DIR}/include"
+target_include_directories(
+    ${PROJECT_NAME}_INTERFACE
+    INTERFACE "${CMAKE_CURRENT_LIST_DIR}/include"
 )
 
 add_library(${PROJECT_NAME} STATIC)
@@ -114,29 +115,33 @@ target_sources(
 
 sdl_find_package(BSON REQUIRED)
 
-target_link_libraries(${PROJECT_NAME}
-                      PUBLIC utils::utils
-                             smart_objects::smart_objects
-                             resumption::resumption
-                             interfaces::HMI_API
-                             interfaces::MOBILE_API
-                             interfaces::v4_protocol_v1_2_no_extra
-                             connection_handler::connection_handler
-                             hmi_message_handler::hmi_message_handler
-                             Policy::Policy
-                             Policy::usage_statistics
-                             BSON::BSON
-                      PRIVATE components::interface
+target_link_libraries(
+    ${PROJECT_NAME}
+    PUBLIC
+        utils::utils
+        smart_objects::smart_objects
+        resumption::resumption
+        interfaces::HMI_API
+        interfaces::MOBILE_API
+        interfaces::v4_protocol_v1_2_no_extra
+        connection_handler::connection_handler
+        hmi_message_handler::hmi_message_handler
+        Policy::Policy
+        Policy::usage_statistics
+        BSON::BSON
+    PRIVATE components::interface
 )
 
 if(TELEMETRY_MONITOR)
-    target_link_libraries(${PROJECT_NAME}
-                          PUBLIC telemetry_monitor::telemetry_monitor
-)
+    target_link_libraries(
+        ${PROJECT_NAME}
+        PUBLIC telemetry_monitor::telemetry_monitor
+    )
 endif()
 
-target_include_directories(${PROJECT_NAME}
-                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
+target_include_directories(
+    ${PROJECT_NAME}
+    PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
 )
 
 add_subdirectory(rpc_plugins)

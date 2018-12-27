@@ -29,7 +29,8 @@ cmake_minimum_required(VERSION 3.11)
 
 set(PROJECT smartDeviceLinkCore)
 project(${PROJECT})
-set(CMAKE_MODULE_PATH
+set(
+    CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}
     "${CMAKE_SOURCE_DIR}/tools/cmake/modules/"
 )
@@ -39,7 +40,6 @@ include("${CMAKE_CURRENT_LIST_DIR}/tools/cmake/helpers/install_rules.cmake")
 include(${CMAKE_SOURCE_DIR}/tools/cmake/helpers/platform.cmake)
 include(
     "${CMAKE_CURRENT_LIST_DIR}/tools/cmake/helpers/build_config_generator.cmake"
-    
 )
 
 include(CMakeDependentOption)
@@ -63,7 +63,6 @@ set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 
 include(
     "${CMAKE_CURRENT_LIST_DIR}/tools/cmake/helpers/git_commit_information.cmake"
-    
 )
 
 # Jenkins integration section dont modify this section if you dont know details
@@ -74,9 +73,10 @@ option(
     "Turn on and off extended Madia Manager features relates to PulseAudio A2DP and GStreamer"
     OFF
 )
-option(BUILD_SHARED_LIBS
-       "Build all libraries as shared (if ON) or static (if OFF)"
-       OFF
+option(
+    BUILD_SHARED_LIBS
+    "Build all libraries as shared (if ON) or static (if OFF)"
+    OFF
 )
 option(BUILD_BT_SUPPORT "Bluetooth support" ON)
 option(BUILD_USB_SUPPORT "libusb support" ON)
@@ -88,22 +88,26 @@ option(ENABLE_GCOV "gcov code coverage feature" OFF)
 option(ENABLE_SANITIZE "Sanitize tool" OFF)
 option(ENABLE_SECURITY "Security Ford protocol protection" ON)
 option(ENABLE_HMI_PTU_DECRYPTION "Policy table update parsed by hmi" ON)
-option(USE_COTIRE
-       "Use Cotire to speed up build (currently only for commands tests)"
-       ON
+option(
+    USE_COTIRE
+    "Use Cotire to speed up build (currently only for commands tests)"
+    ON
 )
 option(USE_GOLD_LD "Use gold linker intead of GNU linker" ON)
 option(USE_CCACHE "Turn on ccache usage" ON)
 option(USE_DISTCC "Turn on distributed build_usage" OFF)
 
-set(EXTENDED_POLICY "PROPRIETARY"
+set(
+    EXTENDED_POLICY "PROPRIETARY"
     CACHE STRING "Policy mode (PROPRIETARY, HTTP or EXTERNAL_PROPRIETARY)"
 )
-set_property(CACHE EXTENDED_POLICY
-             PROPERTY STRINGS
-                      PROPRIETARY
-                      HTTP
-                      EXTERNAL_PROPRIETARY
+set_property(
+    CACHE EXTENDED_POLICY
+    PROPERTY
+        STRINGS
+        PROPRIETARY
+        HTTP
+        EXTERNAL_PROPRIETARY
 )
 if(EXTENDED_POLICY STREQUAL "")
     set(EXTENDED_POLICY "PROPRIETARY")
@@ -126,14 +130,15 @@ set(CMAKE_C_COMPILER $ENV{CMAKE_C_COMPILER})
 set(BUILDDIR "$ENV{BUILDDIR}")
 
 if(ARCH_TYPE_OPTION)
-    if(NOT
-       (${ARCH_TYPE_OPTION} STREQUAL "x86")
-       AND NOT (${ARCH_TYPE_OPTION} STREQUAL "armv7"))
+    if(
+        NOT
+        (${ARCH_TYPE_OPTION} STREQUAL "x86")
+        AND NOT (${ARCH_TYPE_OPTION} STREQUAL "armv7")
+    )
         message(
             AUTHOR_WARNING
                 "HW architecture is not defined, using x86. Allowed values are x86/armv7 (case sensitive)"
-            
-)
+        )
         set(ARCH_TYPE_OPTION "x86")
     endif()
 else()
@@ -164,14 +169,14 @@ if(NOT CMAKE_BUILD_TYPE)
             STRING
             "Choose the type of build. Options are: None, Debug, Release, RelWithDebInfo, MinSizeRel."
         FORCE
-)
+    )
 endif()
 
 if(HMI_ADAPTER_OPTION)
     if(${HMI_ADAPTER_OPTION} STREQUAL "MESSAGEBROKER")
         message(
             STATUS "Jenkins integration: selected HMI adapter MESSAGEBROKER"
-)
+        )
         set(HMIADAPTER "messagebroker")
     endif()
 endif()
@@ -266,35 +271,44 @@ get_property(cHelpString CACHE ENABLE_HMI_PTU_DECRYPTION PROPERTY HELPSTRING)
 get_property(cType CACHE ENABLE_HMI_PTU_DECRYPTION PROPERTY TYPE)
 get_property(cValue CACHE ENABLE_HMI_PTU_DECRYPTION PROPERTY VALUE)
 file(APPEND "${build_config_path}" "//${cHelpString}\n")
-file(APPEND "${build_config_path}"
-            "ENABLE_HMI_PTU_DECRYPTION:${cType}=${cValue}\n"
+file(
+    APPEND
+        "${build_config_path}" "ENABLE_HMI_PTU_DECRYPTION:${cType}=${cValue}\n"
 )
 
 add_custom_target(
     pasa-tarball
-    COMMAND ${CMAKE_SOURCE_DIR}/tools/Utils/export-customer-specific.sh
-            ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} pasa
-    COMMAND tar -cz -C /tmp/PASA -f ${CMAKE_BINARY_DIR}/pasa.tar.gz .
-    DEPENDS HMI_API
-            MOBILE_API
-            v4_protocol_v1_2_no_extra
+    COMMAND
+        ${CMAKE_SOURCE_DIR}/tools/Utils/export-customer-specific.sh
+        ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} pasa
+    COMMAND
+        tar -cz -C /tmp/PASA -f ${CMAKE_BINARY_DIR}/pasa.tar.gz .
+    DEPENDS
+        HMI_API
+        MOBILE_API
+        v4_protocol_v1_2_no_extra
 )
 
 add_custom_target(
     ford-tarball
-    COMMAND ${CMAKE_SOURCE_DIR}/tools/Utils/export-customer-specific.sh
-            ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ford
-    COMMAND tar -cz -C /tmp/FORD -f ${CMAKE_BINARY_DIR}/ford.tar.gz .
-    DEPENDS HMI_API
-            MOBILE_API
-            v4_protocol_v1_2_no_extra
+    COMMAND
+        ${CMAKE_SOURCE_DIR}/tools/Utils/export-customer-specific.sh
+        ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ford
+    COMMAND
+        tar -cz -C /tmp/FORD -f ${CMAKE_BINARY_DIR}/ford.tar.gz .
+    DEPENDS
+        HMI_API
+        MOBILE_API
+        v4_protocol_v1_2_no_extra
 )
 
 add_custom_target(
     genivi-tarball
-    COMMAND ${CMAKE_SOURCE_DIR}/tools/Utils/export-customer-specific.sh
-            ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} genivi
-    COMMAND tar -cz -C /tmp/GENIVI -f ${CMAKE_BINARY_DIR}/genivi.tar.gz .
+    COMMAND
+        ${CMAKE_SOURCE_DIR}/tools/Utils/export-customer-specific.sh
+        ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} genivi
+    COMMAND
+        tar -cz -C /tmp/GENIVI -f ${CMAKE_BINARY_DIR}/genivi.tar.gz .
 )
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
@@ -336,7 +350,7 @@ if(USE_DISTCC)
         message(
             WARNING
                 " distcc was not found. Distributed compilation is impossible."
-)
+        )
     endif(DISTCC_FOUND)
 endif(USE_DISTCC)
 
@@ -403,12 +417,14 @@ else()
     add_definitions(-DNO_HMI)
 endif()
 
-if(HMI
-   STREQUAL
-   "web"
-   AND NOT
-       DEFINED
-       HMIADAPTER
+if(
+    HMI
+    STREQUAL
+    "web"
+    AND
+        NOT
+        DEFINED
+        HMIADAPTER
 )
     set(HMIADAPTER "messagebroker")
 endif()
@@ -436,7 +452,8 @@ if(CMAKE_SYSTEM_NAME STREQUAL "QNX")
     set(RTLIB)
 endif()
 
-set(RPATH_DIRECTORIES
+set(
+    RPATH_DIRECTORIES
     ${CMAKE_INSTALL_PREFIX}/bin/plugins
     /usr/local/lib
     /usr/local
@@ -469,25 +486,24 @@ if(DOXYGEN_FOUND)
     else()
         set(DOXYGEN_ENABLE_DIAGRAMS_PARAM "NO")
     endif()
-    configure_file("${PROJECT_SOURCE_DIR}/Doxyfile"
-                   "${PROJECT_BINARY_DIR}/Doxyfile"
-)
+    configure_file(
+        "${PROJECT_SOURCE_DIR}/Doxyfile" "${PROJECT_BINARY_DIR}/Doxyfile"
+    )
     file(MAKE_DIRECTORY "${PROJECT_BINARY_DIR}/doc/doxygen")
-    add_custom_target(doxygen
-                      COMMAND ${DOXYGEN_EXECUTABLE}
-                              "${PROJECT_BINARY_DIR}/Doxyfile"
-)
+    add_custom_target(
+        doxygen
+        COMMAND ${DOXYGEN_EXECUTABLE} "${PROJECT_BINARY_DIR}/Doxyfile"
+    )
 else()
     message(STATUS "Doxygen not found. Documentation will not be generated")
     message(
         STATUS
             "To enable documentation generation please install doxygen and graphviz packages"
-        
-)
+    )
     message(STATUS "sudo apt-get install doxygen graphviz")
     message(
         STATUS "To enable processing of MscGen comments please install mscgen"
-)
+    )
     message(STATUS "sudo apt-get install mscgen")
 endif()
 

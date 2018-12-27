@@ -33,63 +33,72 @@ file(COPY hmi_capabilities_sc1.json DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 file(COPY hmi_capabilities_sc2.json DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 file(COPY smartDeviceLink_test.ini DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
-add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libPolicy.so
-                   COMMAND ${CMAKE_COMMAND} -E copy ${POLICY_PATH}/libPolicy.so
-                           ${CMAKE_CURRENT_BINARY_DIR}
+add_custom_command(
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libPolicy.so
+    COMMAND
+        ${CMAKE_COMMAND} -E copy ${POLICY_PATH}/libPolicy.so
+        ${CMAKE_CURRENT_BINARY_DIR}
 )
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/resumption)
-file(COPY
-     smartDeviceLink_test.ini
-     DESTINATION
-     ${CMAKE_CURRENT_BINARY_DIR}/resumption
+file(
+    COPY
+    smartDeviceLink_test.ini
+    DESTINATION
+    ${CMAKE_CURRENT_BINARY_DIR}/resumption
 )
 
-set(CMAKE_EXE_LINKER_FLAGS
+set(
+    CMAKE_EXE_LINKER_FLAGS
     "${CMAKE_EXE_LINKER_FLAGS} -Wl,-rpath=${CMAKE_CURRENT_BINARY_DIR}"
 )
 
 project(application_manager_test)
 create_test(${PROJECT_NAME})
 
-target_include_directories(${PROJECT_NAME}
-                           PRIVATE ${COMPONENTS_DIR}
-                                   ${POLICY_MOCK_INCLUDE_PATH}
-                                   ${APPLICATION_MANAGER_DIR}/test/include/
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE
+        ${COMPONENTS_DIR}
+        ${POLICY_MOCK_INCLUDE_PATH}
+        ${APPLICATION_MANAGER_DIR}/test/include/
 )
 
-target_sources(${PROJECT_NAME}
-               PRIVATE
-               ${APPLICATION_MANAGER_DIR}/test/mock_message_helper.cc
-               ${APPLICATION_MANAGER_DIR}/test/mobile_message_handler_test.cc
-               ${APPLICATION_MANAGER_DIR}/test/mobile_message_handler_v1_test.cc
-               ${APPLICATION_MANAGER_DIR}/test/request_info_test.cc
-               ${APPLICATION_MANAGER_DIR}/test/resumption_sql_queries_test.cc
-               ${APPLICATION_MANAGER_DIR}/test/event_engine_test.cc
-               ${APPLICATION_MANAGER_DIR}/test/policy_event_observer_test.cc
-               ${APPLICATION_MANAGER_DIR}/test/application_impl_test.cc
-               ${APPLICATION_MANAGER_DIR}/test/hmi_capabilities_test.cc
-               ${APPLICATION_MANAGER_DIR}/test/hmi_language_handler_test.cc
-               ${APPLICATION_MANAGER_DIR}/test/application_state_test.cc
-               ${APPLICATION_MANAGER_DIR}/test/usage_statistics_test.cc
-               ${APPLICATION_MANAGER_DIR}/test/policy_handler_test.cc
-               ${APPLICATION_MANAGER_DIR}/test/application_manager_impl_test.cc
-               ${APPLICATION_MANAGER_DIR}/test/application_helper_test.cc
-               ${APPLICATION_MANAGER_DIR}/test/command_holder_test.cc
+target_sources(
+    ${PROJECT_NAME}
+    PRIVATE
+    ${APPLICATION_MANAGER_DIR}/test/mock_message_helper.cc
+    ${APPLICATION_MANAGER_DIR}/test/mobile_message_handler_test.cc
+    ${APPLICATION_MANAGER_DIR}/test/mobile_message_handler_v1_test.cc
+    ${APPLICATION_MANAGER_DIR}/test/request_info_test.cc
+    ${APPLICATION_MANAGER_DIR}/test/resumption_sql_queries_test.cc
+    ${APPLICATION_MANAGER_DIR}/test/event_engine_test.cc
+    ${APPLICATION_MANAGER_DIR}/test/policy_event_observer_test.cc
+    ${APPLICATION_MANAGER_DIR}/test/application_impl_test.cc
+    ${APPLICATION_MANAGER_DIR}/test/hmi_capabilities_test.cc
+    ${APPLICATION_MANAGER_DIR}/test/hmi_language_handler_test.cc
+    ${APPLICATION_MANAGER_DIR}/test/application_state_test.cc
+    ${APPLICATION_MANAGER_DIR}/test/usage_statistics_test.cc
+    ${APPLICATION_MANAGER_DIR}/test/policy_handler_test.cc
+    ${APPLICATION_MANAGER_DIR}/test/application_manager_impl_test.cc
+    ${APPLICATION_MANAGER_DIR}/test/application_helper_test.cc
+    ${APPLICATION_MANAGER_DIR}/test/command_holder_test.cc
 )
 
-target_link_libraries(${PROJECT_NAME}
-                      PRIVATE application_manager::application_manager
-                              Policy::usage_statistics
-                              components::interface
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE
+        application_manager::application_manager
+        Policy::usage_statistics
+        components::interface
 )
 
 project(application_manager_mock_hmi_test)
 create_test(${PROJECT_NAME})
 
-target_include_directories(${PROJECT_NAME}
-                           PRIVATE ${POLICY_MOCK_INCLUDE_PATH}
-                                   ${APPLICATION_MANAGER_DIR}/test/include/
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE ${POLICY_MOCK_INCLUDE_PATH} ${APPLICATION_MANAGER_DIR}/test/include/
 )
 
 target_sources(
@@ -98,37 +107,40 @@ target_sources(
     ${APPLICATION_MANAGER_DIR}/test/application_manager_impl_mock_hmi_test.cc
 )
 
-target_link_libraries(${PROJECT_NAME}
-                      PRIVATE application_manager::application_manager
-                              components::interface
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE application_manager::application_manager components::interface
 )
 
 project(help_prompt_manager_test)
 create_test(${PROJECT_NAME})
 
-target_include_directories(${PROJECT_NAME}
-                           PRIVATE ${POLICY_MOCK_INCLUDE_PATH}
-                                   ${APPLICATION_MANAGER_DIR}/test/include/
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE ${POLICY_MOCK_INCLUDE_PATH} ${APPLICATION_MANAGER_DIR}/test/include/
 )
 
-target_sources(${PROJECT_NAME}
-               PRIVATE
-               ${APPLICATION_MANAGER_DIR}/test/help_prompt_manager_test.cc
-               ${APPLICATION_MANAGER_DIR}/test/mock_message_helper.cc
+target_sources(
+    ${PROJECT_NAME}
+    PRIVATE
+    ${APPLICATION_MANAGER_DIR}/test/help_prompt_manager_test.cc
+    ${APPLICATION_MANAGER_DIR}/test/mock_message_helper.cc
 )
 
-target_link_libraries(${PROJECT_NAME}
-                      PRIVATE application_manager::application_manager
-                              components::interface
-                              sdl_rpc_plugins_static_lib
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE
+        application_manager::application_manager
+        components::interface
+        sdl_rpc_plugins_static_lib
 )
 
 project(request_controller_test)
 create_test(${PROJECT_NAME})
 
-target_include_directories(${PROJECT_NAME}
-                           PRIVATE ${POLICY_MOCK_INCLUDE_PATH}
-                                   ${APPLICATION_MANAGER_DIR}/test/include/
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE ${POLICY_MOCK_INCLUDE_PATH} ${APPLICATION_MANAGER_DIR}/test/include/
 )
 
 target_sources(
@@ -138,17 +150,17 @@ target_sources(
     ${APPLICATION_MANAGER_DIR}/test/mock_message_helper.cc
 )
 
-target_link_libraries(${PROJECT_NAME}
-                      PRIVATE application_manager::application_manager
-                              components::interface
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE application_manager::application_manager components::interface
 )
 
 project(data_resumption_test)
 create_test(${PROJECT_NAME})
 
-target_include_directories(${PROJECT_NAME}
-                           PRIVATE ${POLICY_MOCK_INCLUDE_PATH}
-                                   ${APPLICATION_MANAGER_DIR}/test/include/
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE ${POLICY_MOCK_INCLUDE_PATH} ${APPLICATION_MANAGER_DIR}/test/include/
 )
 
 target_sources(
@@ -161,9 +173,9 @@ target_sources(
     ${APPLICATION_MANAGER_DIR}/test/mock_message_helper.cc
 )
 
-target_link_libraries(${PROJECT_NAME}
-                      PRIVATE application_manager::application_manager
-                              components::interface
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE application_manager::application_manager components::interface
 )
 
 add_subdirectory(state_controller)

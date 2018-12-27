@@ -33,11 +33,13 @@ create_test(${PROJECT_NAME})
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 
 set(XML_NAME ${CMAKE_SOURCE_DIR}/src/components/interfaces/MOBILE_API.xml)
-add_custom_target(generate_version
-                  COMMAND ${INTEFRACE_GENERATOR_CMD} ${XML_NAME} "mobile_apis"
-                          ${CMAKE_CURRENT_BINARY_DIR} "--parser-type" "sdlrpcv2"
-                  DEPENDS ${INTERFACE_GENERATOR_DEPENDENCIES} ${XML_NAME}
-                  VERBATIM
+add_custom_target(
+    generate_version
+    COMMAND
+        ${INTEFRACE_GENERATOR_CMD} ${XML_NAME} "mobile_apis"
+        ${CMAKE_CURRENT_BINARY_DIR} "--parser-type" "sdlrpcv2"
+    DEPENDS ${INTERFACE_GENERATOR_DEPENDENCIES} ${XML_NAME}
+    VERBATIM
 )
 
 set(SOURCES generated_msg_version_test.cc)

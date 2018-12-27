@@ -29,11 +29,13 @@ project(rc_commands_test)
 
 create_test(${PROJECT_NAME})
 
-target_include_directories(${PROJECT_NAME}
-                           PRIVATE ${APPLICATION_MANAGER_DIR}/test/include
-                                   ${APPLICATION_MANAGER_DIR}/include
-                                   ${CMAKE_CURRENT_LIST_DIR}/include
-                                   ${COMPONENTS_DIR}
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE
+        ${APPLICATION_MANAGER_DIR}/test/include
+        ${APPLICATION_MANAGER_DIR}/include
+        ${CMAKE_CURRENT_LIST_DIR}/include
+        ${COMPONENTS_DIR}
 )
 
 target_sources(
@@ -46,22 +48,24 @@ target_sources(
     "${CMAKE_CURRENT_LIST_DIR}/commands/on_remote_control_settings_test.cc"
     "${CMAKE_CURRENT_LIST_DIR}/commands/rc_get_interior_vehicle_data_consent_test.cc"
     "${CMAKE_CURRENT_LIST_DIR}/commands/set_interior_vehicle_data_request_test.cc"
-    
 )
 
-target_link_libraries(${PROJECT_NAME}
-                      PRIVATE components::interface rpc_plugins_static_lib
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE components::interface rpc_plugins_static_lib
 )
 
 project(rc_plugin_test)
 
 create_test(${PROJECT_NAME})
 
-target_include_directories(${PROJECT_NAME}
-                           PRIVATE ${APPLICATION_MANAGER_DIR}/test/include
-                                   ${APPLICATION_MANAGER_DIR}/include
-                                   ${CMAKE_CURRENT_LIST_DIR}/include
-                                   ${COMPONENTS_DIR}
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE
+        ${APPLICATION_MANAGER_DIR}/test/include
+        ${APPLICATION_MANAGER_DIR}/include
+        ${CMAKE_CURRENT_LIST_DIR}/include
+        ${COMPONENTS_DIR}
 )
 
 target_sources(
@@ -71,6 +75,7 @@ target_sources(
     "${CMAKE_CURRENT_SOURCE_DIR}/interior_data_cache_test.cc"
 )
 
-target_link_libraries(${PROJECT_NAME}
-                      PRIVATE components::interface rpc_plugins_static_lib
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE components::interface rpc_plugins_static_lib
 )

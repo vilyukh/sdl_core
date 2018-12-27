@@ -28,8 +28,9 @@
 project(transport_manager_test)
 create_test(${PROJECT_NAME})
 
-target_include_directories(${PROJECT_NAME}
-                           PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 set(EXCLUDE_PATHS platform_specific raw_message_matcher.cc)
@@ -44,9 +45,9 @@ list(APPEND SOURCES ${PLATFORM_DEPENDENT_SOURCES})
 
 target_sources(${PROJECT_NAME} PRIVATE ${SOURCES})
 
-target_link_libraries(${PROJECT_NAME}
-                      PRIVATE transport_manager::transport_manager
-                              components::interface
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE transport_manager::transport_manager components::interface
 )
 
 if(BUILD_BT_SUPPORT)

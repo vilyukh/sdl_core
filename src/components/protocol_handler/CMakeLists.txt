@@ -43,22 +43,26 @@ target_sources(
 
 sdl_find_package(BSON REQUIRED)
 
-target_link_libraries(${PROJECT_NAME}
-                      PUBLIC config_profile::config_profile
-                             protocol::protocol
-                             utils::utils
-                             connection_handler::connection_handler
-                      PRIVATE components::interface BSON::BSON
+target_link_libraries(
+    ${PROJECT_NAME}
+    PUBLIC
+        config_profile::config_profile
+        protocol::protocol
+        utils::utils
+        connection_handler::connection_handler
+    PRIVATE components::interface BSON::BSON
 )
 
 if(TELEMETRY_MONITOR)
-    target_link_libraries(${PROJECT_NAME}
-                          PUBLIC telemetry_monitor::telemetry_monitor
-)
+    target_link_libraries(
+        ${PROJECT_NAME}
+        PUBLIC telemetry_monitor::telemetry_monitor
+    )
 endif()
 
-target_include_directories(${PROJECT_NAME}
-                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
+target_include_directories(
+    ${PROJECT_NAME}
+    PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
 )
 
 if(BUILD_TESTS)

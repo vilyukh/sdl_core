@@ -18,6 +18,7 @@ else()
 endif()
 
 add_library(boost::system UNKNOWN IMPORTED GLOBAL ${boost_system_LIBRARY})
-set_target_properties(boost::system
-                      PROPERTIES IMPORTED_LOCATION "${boost_system_LIBRARY}"
+set_target_properties(
+    boost::system
+    PROPERTIES IMPORTED_LOCATION "${boost_system_LIBRARY}"
 )

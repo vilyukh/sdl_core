@@ -35,23 +35,23 @@ if(NOT EXISTS "${QNX_TARGET}/etc/qversion")
     message(
         FATAL_ERROR
             "The folder ${QNX_TARGET} is missing /etc/qversion and may not provide a QNX SDK"
-        
-)
+    )
 endif()
 
 file(READ "${QNX_TARGET}/etc/qversion" CMAKE_SYSTEM_VERSION)
-string(REGEX
-       REPLACE "[^0-9.]"
-               ""
-               CMAKE_SYSTEM_VERSION
-               "${CMAKE_SYSTEM_VERSION}"
+string(
+    REGEX
+    REPLACE
+        "[^0-9.]"
+        ""
+        CMAKE_SYSTEM_VERSION
+        "${CMAKE_SYSTEM_VERSION}"
 )
 if("${CMAKE_SYSTEM_VERSION}" VERSION_LESS "7.0.0")
     message(
         FATAL_ERROR
             "This toolchain file is not supported for QNX ${CMAKE_SYSTEM_VERSION}"
-        
-)
+    )
 else()
     message(STATUS "QNX Version is ${CMAKE_SYSTEM_VERSION}")
 endif()
@@ -63,7 +63,8 @@ endif()
 # root directory containing sysroots for different0 platforms. Therefore to
 # avoid passing overall QNX_TARGET as root path to search just for 'usr'
 # directory ${QNX_TARGET}/usr passed instead.
-set(CMAKE_FIND_ROOT_PATH
+set(
+    CMAKE_FIND_ROOT_PATH
     "${CMAKE_FIND_ROOT_PATH}"
     "${QNX_TARGET}/${QNX_TARGET_ARCH_DIR}"
     "${QNX_TARGET}/usr"
@@ -79,10 +80,12 @@ set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 
-set(CMAKE_C_COMPILER "${QNX_HOST}/usr/bin/qcc${HOST_EXECUTABLE_SUFFIX}"
+set(
+    CMAKE_C_COMPILER "${QNX_HOST}/usr/bin/qcc${HOST_EXECUTABLE_SUFFIX}"
     CACHE PATH "QNX gcc Program"
 )
-set(CMAKE_CXX_COMPILER "${QNX_HOST}/usr/bin/qcc${HOST_EXECUTABLE_SUFFIX}"
+set(
+    CMAKE_CXX_COMPILER "${QNX_HOST}/usr/bin/qcc${HOST_EXECUTABLE_SUFFIX}"
     CACHE PATH "QNX g++ Program"
 )
 set(

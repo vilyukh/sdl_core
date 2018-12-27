@@ -28,9 +28,9 @@
 project(state_controller_test)
 create_test(${PROJECT_NAME})
 
-target_include_directories(${PROJECT_NAME}
-                           PRIVATE ${POLICY_MOCK_INCLUDE_PATH}
-                                   ${APPLICATION_MANAGER_DIR}/test/include/
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE ${POLICY_MOCK_INCLUDE_PATH} ${APPLICATION_MANAGER_DIR}/test/include/
 )
 
 target_sources(
@@ -40,7 +40,7 @@ target_sources(
     ${APPLICATION_MANAGER_DIR}/test/mock_message_helper.cc
 )
 
-target_link_libraries(${PROJECT_NAME}
-                      PRIVATE application_manager::application_manager
-                              components::interface
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE application_manager::application_manager components::interface
 )

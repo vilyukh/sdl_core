@@ -43,17 +43,20 @@ target_sources(
     "${CMAKE_CURRENT_LIST_DIR}/src/transport_manager_observer.cc"
 )
 
-target_link_libraries(${PROJECT_NAME}
-                      PUBLIC utils::utils
-                             protocol_handler::protocol_handler
-                             application_manager::application_manager
-                             transport_manager::transport_manager
-                             jsoncpp::jsoncpp
-                      PRIVATE components::interface
+target_link_libraries(
+    ${PROJECT_NAME}
+    PUBLIC
+        utils::utils
+        protocol_handler::protocol_handler
+        application_manager::application_manager
+        transport_manager::transport_manager
+        jsoncpp::jsoncpp
+    PRIVATE components::interface
 )
 
-target_include_directories(${PROJECT_NAME}
-                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
+target_include_directories(
+    ${PROJECT_NAME}
+    PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
 )
 
 if(BUILD_TESTS)

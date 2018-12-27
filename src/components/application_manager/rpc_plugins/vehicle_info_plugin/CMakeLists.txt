@@ -66,7 +66,6 @@ set(
     "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/subscribe_vehicle_data_response.cc"
     "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/unsubscribe_vehicle_data_request.cc"
     "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/unsubscribe_vehicle_data_response.cc"
-    
 )
 
 add_dynamic_library(${PROJECT_NAME})

@@ -30,29 +30,32 @@ project(smartDeviceLinkCore)
 add_executable(${PROJECT_NAME})
 add_executable(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
-target_sources(${PROJECT_NAME}
-               PRIVATE
-               "${CMAKE_CURRENT_LIST_DIR}/main.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/life_cycle_impl.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/low_voltage_signals_handler.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/signal_handlers.cc"
+target_sources(
+    ${PROJECT_NAME}
+    PRIVATE
+    "${CMAKE_CURRENT_LIST_DIR}/main.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/life_cycle_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/low_voltage_signals_handler.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/signal_handlers.cc"
 )
 
 sdl_find_package(boost REQUIRED)
 
 target_link_libraries(
     ${PROJECT_NAME}
-    PUBLIC application_manager::application_manager
-           media_manager::media_manager
-           protocol_handler::protocol_handler
-           $<$<BOOL:${ENABLE_SECURITY}>:security_manager::security_manager>
-           transport_manager::transport_manager
-           $<$<BOOL:${TELEMETRY_MONITOR}>:telemetry_monitor::telemetry_monitor>
-           utils::utils
-    PRIVATE components::interface
-            Policy::usage_statistics
-            boost::filesystem
-            boost::system
+    PUBLIC
+        application_manager::application_manager
+        media_manager::media_manager
+        protocol_handler::protocol_handler
+        $<$<BOOL:${ENABLE_SECURITY}>:security_manager::security_manager>
+        transport_manager::transport_manager
+        $<$<BOOL:${TELEMETRY_MONITOR}>:telemetry_monitor::telemetry_monitor>
+        utils::utils
+    PRIVATE
+        components::interface
+        Policy::usage_statistics
+        boost::filesystem
+        boost::system
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_SOURCE_DIR}/src")
@@ -73,9 +76,10 @@ if(BUILD_USB_SUPPORT)
     endif()
 endif()
 
-install(TARGETS ${PROJECT_NAME}
-        DESTINATION "${CMAKE_INSTALL_BINDIR}"
-        COMPONENT sdl_core
+install(
+    TARGETS ${PROJECT_NAME}
+    DESTINATION "${CMAKE_INSTALL_BINDIR}"
+    COMPONENT sdl_core
 )
 
 # Print/Generate SDL dependencies file only for QNX platform
@@ -88,14 +92,16 @@ if(QNXNTO)
             TARGET
             ${PROJECT_NAME}
             POST_BUILD
-            COMMAND ${CMAKE_SOURCE_DIR}/tools/Utils/check_build_ids.sh
-                    ARGS ${BUILD_IDS_SEARCH_PATH}
-                         >
-                         ${BUILD_IDS_FILE}
+            COMMAND
+                ${CMAKE_SOURCE_DIR}/tools/Utils/check_build_ids.sh
+                ARGS
+                    ${BUILD_IDS_SEARCH_PATH}
+                    >
+                    ${BUILD_IDS_FILE}
             COMMAND cat ${BUILD_IDS_FILE}
             COMMENT "Checking build ids of SDL dependencies"
             VERBATIM
-)
+        )
     endif(CMAKE_HOST_UNIX)
 endif(QNXNTO)
 
@@ -114,19 +120,20 @@ if(QNXNTO)
     set(SDL_TMPDIR_PATH "/fs/tmpfs")
 
     set(POLICY_QDB_DB_INITIALIZER "${CMAKE_CURRENT_LIST_DIR}/init_policy.sh")
-    install(FILES ${POLICY_QDB_DB_INITIALIZER}
-            DESTINATION "${SDL_CONFIG_INSTALL_DIR}"
-            COMPONENT
-            sdl_core
-            PERMISSIONS
-            OWNER_READ
-            OWNER_WRITE
-            OWNER_EXECUTE
-            GROUP_READ
-            GROUP_EXECUTE
-            WORLD_READ
-            WORLD_EXECUTE
-)
+    install(
+        FILES ${POLICY_QDB_DB_INITIALIZER}
+        DESTINATION "${SDL_CONFIG_INSTALL_DIR}"
+        COMPONENT
+        sdl_core
+        PERMISSIONS
+        OWNER_READ
+        OWNER_WRITE
+        OWNER_EXECUTE
+        GROUP_READ
+        GROUP_EXECUTE
+        WORLD_READ
+        WORLD_EXECUTE
+    )
 else()
     set(SDL_CONFIG_PATH "${SDL_CONFIG_INSTALL_DIR}")
     set(SDL_CACERTIFICATE_PATH ".")
@@ -136,45 +143,52 @@ else()
     set(SDL_LOG_FILE ${SDL_LOG_FILENAME})
     set(SDL_STORAGE_PATH "storage")
 
-    configure_file("${CMAKE_CURRENT_SOURCE_DIR}/log4cxx.properties"
-                   "${CMAKE_CURRENT_BINARY_DIR}/log4cxx.properties"
-                   @ONLY
-                   NEWLINE_STYLE UNIX
-)
+    configure_file(
+        "${CMAKE_CURRENT_SOURCE_DIR}/log4cxx.properties"
+        "${CMAKE_CURRENT_BINARY_DIR}/log4cxx.properties"
+        @ONLY
+        NEWLINE_STYLE UNIX
+    )
 
-    list(APPEND SDL_LOG_CONFIG_LIST
-                "${CMAKE_CURRENT_BINARY_DIR}/log4cxx.properties"
-)
+    list(
+        APPEND
+            SDL_LOG_CONFIG_LIST "${CMAKE_CURRENT_BINARY_DIR}/log4cxx.properties"
+    )
 
     set(BUILD_CONFIG_FILENAME "${CMAKE_CURRENT_BINARY_DIR}/build_config.txt")
     generate_build_config(${BUILD_CONFIG_FILENAME})
 
     list(APPEND SDL_LOG_CONFIG_LIST "${BUILD_CONFIG_FILENAME}")
 
-    install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/audio.8bit.wav"
-            DESTINATION ${CMAKE_INSTALL_BINDIR}
-            COMPONENT sdl_core
-)
+    install(
+        FILES "${CMAKE_CURRENT_SOURCE_DIR}/audio.8bit.wav"
+        DESTINATION ${CMAKE_INSTALL_BINDIR}
+        COMPONENT sdl_core
+    )
 endif()
 
 set(SDL_OUT_CONFIG_FILE "${CMAKE_CURRENT_BINARY_DIR}/smartDeviceLink.ini")
 
-install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/hmi_capabilities.json"
-              "${CMAKE_CURRENT_SOURCE_DIR}/sdl_preloaded_pt.json"
-              ${SDL_LOG_CONFIG_LIST}
-        DESTINATION ${SDL_CONFIG_INSTALL_DIR}
-        COMPONENT sdl_core
+install(
+    FILES
+        "${CMAKE_CURRENT_SOURCE_DIR}/hmi_capabilities.json"
+        "${CMAKE_CURRENT_SOURCE_DIR}/sdl_preloaded_pt.json"
+        ${SDL_LOG_CONFIG_LIST}
+    DESTINATION ${SDL_CONFIG_INSTALL_DIR}
+    COMPONENT sdl_core
 )
 
-configure_file(${SDL_IN_CONFIG_FILE}
-               ${SDL_OUT_CONFIG_FILE}
-               @ONLY
-               NEWLINE_STYLE UNIX
+configure_file(
+    ${SDL_IN_CONFIG_FILE}
+    ${SDL_OUT_CONFIG_FILE}
+    @ONLY
+    NEWLINE_STYLE UNIX
 )
 
-install(FILES ${SDL_OUT_CONFIG_FILE}
-        DESTINATION ${SDL_CONFIG_INSTALL_DIR}
-        COMPONENT sdl_core
+install(
+    FILES ${SDL_OUT_CONFIG_FILE}
+    DESTINATION ${SDL_CONFIG_INSTALL_DIR}
+    COMPONENT sdl_core
 )
 
 if(BUILD_TESTS)

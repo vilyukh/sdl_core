@@ -28,20 +28,22 @@
 project(commands_test)
 create_test(${PROJECT_NAME})
 
-target_sources(${PROJECT_NAME}
-               PRIVATE
-               ${APPLICATION_MANAGER_DIR}/test/mock_message_helper.cc
-               ${APPLICATION_MANAGER_DIR}/test/mock_application_helper.cc
-               ${CMAKE_CURRENT_SOURCE_DIR}/command_impl_test.cc
-               ${CMAKE_CURRENT_SOURCE_DIR}/command_request_impl_test.cc
-               ${CMAKE_CURRENT_SOURCE_DIR}/command_response_impl_test.cc
+target_sources(
+    ${PROJECT_NAME}
+    PRIVATE
+    ${APPLICATION_MANAGER_DIR}/test/mock_message_helper.cc
+    ${APPLICATION_MANAGER_DIR}/test/mock_application_helper.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/command_impl_test.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/command_request_impl_test.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/command_response_impl_test.cc
 )
 
-target_include_directories(${PROJECT_NAME}
-                           PRIVATE ${APPLICATION_MANAGER_DIR}/test/include/
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE ${APPLICATION_MANAGER_DIR}/test/include/
 )
 
-target_link_libraries(${PROJECT_NAME}
-                      PRIVATE application_manager::application_manager
-                              components::interface
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE application_manager::application_manager components::interface
 )

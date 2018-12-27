@@ -33,26 +33,30 @@ find_package(OpenSSL 1.0 EXACT REQUIRED)
 add_library(${PROJECT_NAME} STATIC)
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
-target_sources(${PROJECT_NAME}
-               PRIVATE
-               "${CMAKE_CURRENT_LIST_DIR}/src/crypto_manager_impl.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/security_manager_impl.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/security_query.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/ssl_context_impl.cc"
+target_sources(
+    ${PROJECT_NAME}
+    PRIVATE
+    "${CMAKE_CURRENT_LIST_DIR}/src/crypto_manager_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/security_manager_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/security_query.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/ssl_context_impl.cc"
 )
 
-target_link_libraries(${PROJECT_NAME}
-                      PUBLIC utils::utils
-                             config_profile::config_profile
-                             protocol_handler::protocol_handler
-                             OpenSSL::Crypto
-                             OpenSSL::SSL
-                             jsoncpp::jsoncpp
-                      PRIVATE components::interface
+target_link_libraries(
+    ${PROJECT_NAME}
+    PUBLIC
+        utils::utils
+        config_profile::config_profile
+        protocol_handler::protocol_handler
+        OpenSSL::Crypto
+        OpenSSL::SSL
+        jsoncpp::jsoncpp
+    PRIVATE components::interface
 )
 
-target_include_directories(${PROJECT_NAME}
-                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
+target_include_directories(
+    ${PROJECT_NAME}
+    PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
 )
 
 if(BUILD_TESTS)

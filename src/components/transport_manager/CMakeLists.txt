@@ -30,10 +30,11 @@ project(transport_manager)
 add_library(${PROJECT_NAME} STATIC)
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
-target_sources(${PROJECT_NAME}
-               PRIVATE
-               "${CMAKE_CURRENT_LIST_DIR}/src/transport_manager_default.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/transport_manager_impl.cc"
+target_sources(
+    ${PROJECT_NAME}
+    PRIVATE
+    "${CMAKE_CURRENT_LIST_DIR}/src/transport_manager_default.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/transport_manager_impl.cc"
 )
 
 target_sources(
@@ -49,7 +50,6 @@ target_sources(
     "${CMAKE_CURRENT_LIST_DIR}/src/transport_adapter/threaded_socket_connection.cc"
     "${CMAKE_CURRENT_LIST_DIR}/src/transport_adapter/transport_adapter_impl.cc"
     "${CMAKE_CURRENT_LIST_DIR}/src/transport_adapter/transport_adapter_listener_impl.cc"
-    
 )
 
 if(BUILD_TESTS)
@@ -57,8 +57,7 @@ if(BUILD_TESTS)
         ${PROJECT_NAME}
         PRIVATE
         "${CMAKE_CURRENT_LIST_DIR}/src/iap2_emulation/iap2_transport_adapter.cc"
-        
-)
+    )
 endif()
 
 if(QNXNTO)
@@ -66,24 +65,23 @@ if(QNXNTO)
         ${PROJECT_NAME}
         PRIVATE
         "${CMAKE_CURRENT_LIST_DIR}/src/tcp/platform_specific/qnx/platform_specific_network_interface_listener.cc"
-        
-)
+    )
 else()
     target_sources(
         ${PROJECT_NAME}
         PRIVATE
         "${CMAKE_CURRENT_LIST_DIR}/src/tcp/platform_specific/linux/platform_specific_network_interface_listener.cc"
-        
-)
+    )
 endif()
 
 if(BUILD_USB_SUPPORT)
-    target_sources(${PROJECT_NAME}
-                   PRIVATE
-                   "${CMAKE_CURRENT_LIST_DIR}/src/usb/usb_aoa_adapter.cc"
-                   "${CMAKE_CURRENT_LIST_DIR}/src/usb/usb_connection_factory.cc"
-                   "${CMAKE_CURRENT_LIST_DIR}/src/usb/usb_device_scanner.cc"
-)
+    target_sources(
+        ${PROJECT_NAME}
+        PRIVATE
+        "${CMAKE_CURRENT_LIST_DIR}/src/usb/usb_aoa_adapter.cc"
+        "${CMAKE_CURRENT_LIST_DIR}/src/usb/usb_connection_factory.cc"
+        "${CMAKE_CURRENT_LIST_DIR}/src/usb/usb_device_scanner.cc"
+    )
     target_compile_definitions(${PROJECT_NAME} PUBLIC USB_SUPPORT)
 
     if(QNXNTO)
@@ -93,7 +91,7 @@ if(BUILD_USB_SUPPORT)
             "${CMAKE_CURRENT_LIST_DIR}/src/usb/qnx/platform_usb_device.cc"
             "${CMAKE_CURRENT_LIST_DIR}/src/usb/qnx/usb_connection.cc"
             "${CMAKE_CURRENT_LIST_DIR}/src/usb/qnx/usb_handler.cc"
-)
+        )
         target_link_libraries(${PROJECT_NAME} PUBLIC usbdi)
     else()
         target_sources(
@@ -102,7 +100,7 @@ if(BUILD_USB_SUPPORT)
             "${CMAKE_CURRENT_LIST_DIR}/src/usb/libusb/platform_usb_device.cc"
             "${CMAKE_CURRENT_LIST_DIR}/src/usb/libusb/usb_connection.cc"
             "${CMAKE_CURRENT_LIST_DIR}/src/usb/libusb/usb_handler.cc"
-)
+        )
     endif()
 endif()
 
@@ -117,24 +115,26 @@ if(BUILD_BT_SUPPORT)
             "${CMAKE_CURRENT_LIST_DIR}/src/bluetooth/message_queue.cc"
             "${CMAKE_CURRENT_LIST_DIR}/src/bluetooth/bluetooth_listener.cc"
             "${CMAKE_CURRENT_LIST_DIR}/src/bluetooth/bluetooth_transport_adapter.cc"
-            
-)
+        )
         target_compile_definitions(${PROJECT_NAME} PUBLIC BLUETOOTH_SUPPORT)
     endif()
 endif()
 
-target_link_libraries(${PROJECT_NAME}
-                      PUBLIC utils::utils
-                             protocol::protocol
-                             config_profile::config_profile
-                             resumption::resumption
-                      PRIVATE components::interface
+target_link_libraries(
+    ${PROJECT_NAME}
+    PUBLIC
+        utils::utils
+        protocol::protocol
+        config_profile::config_profile
+        resumption::resumption
+    PRIVATE components::interface
 )
 
 if(TELEMETRY_MONITOR)
-    target_link_libraries(${PROJECT_NAME}
-                          PUBLIC telemetry_monitor::telemetry_monitor
-)
+    target_link_libraries(
+        ${PROJECT_NAME}
+        PUBLIC telemetry_monitor::telemetry_monitor
+    )
 endif()
 
 if(QNXNTO)
@@ -142,19 +142,18 @@ if(QNXNTO)
         ${PROJECT_NAME}
         PUBLIC
             "${CMAKE_CURRENT_LIST_DIR}/include/transport_manager/tcp/platform_specific/qnx"
-        
-)
+    )
 else()
     target_include_directories(
         ${PROJECT_NAME}
         PUBLIC
             "${CMAKE_CURRENT_LIST_DIR}/include/transport_manager/tcp/platform_specific/linux"
-        
-)
+    )
 endif()
 
-target_include_directories(${PROJECT_NAME}
-                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
+target_include_directories(
+    ${PROJECT_NAME}
+    PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
 )
 
 if(BUILD_TESTS)

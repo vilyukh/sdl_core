@@ -56,7 +56,6 @@ set(
     "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/on_interior_vehicle_data_notification.cc"
     "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/set_interior_vehicle_data_request.cc"
     "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/set_interior_vehicle_data_response.cc"
-    
 )
 
 add_dynamic_library(${PROJECT_NAME})

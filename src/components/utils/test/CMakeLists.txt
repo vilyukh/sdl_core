@@ -28,9 +28,10 @@
 project(utils_test)
 create_test(${PROJECT_NAME})
 
-target_include_directories(${PROJECT_NAME}
-                           PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include
-                                   ${COMPONENTS_DIR}/utils/test/include
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include ${COMPONENTS_DIR}/utils/test/include
 )
 
 include(${CMAKE_SOURCE_DIR}/tools/cmake/helpers/platform.cmake)
@@ -38,10 +39,12 @@ include(${CMAKE_SOURCE_DIR}/tools/cmake/helpers/platform.cmake)
 set(EXCLUDE_PATHS qdb_wrapper test_generator)
 
 if(NOT ENABLE_LOG)
-    list(APPEND EXCLUDE_PATHS
-                auto_trace_test.cc
-                log_message_loop_thread_test.cc
-)
+    list(
+        APPEND
+            EXCLUDE_PATHS
+            auto_trace_test.cc
+            log_message_loop_thread_test.cc
+    )
 endif()
 
 if(NOT BUILD_BACKTRACE_SUPPORT)
@@ -62,10 +65,12 @@ else()
 endif()
 
 # exclude some tests
-list(APPEND EXCLUDE_PATHS
-            generated_code_with_sqlite_test.cc
-            posix_thread_test.cc
-            resource_usage_test.cc
+list(
+    APPEND
+        EXCLUDE_PATHS
+        generated_code_with_sqlite_test.cc
+        posix_thread_test.cc
+        resource_usage_test.cc
 )
 
 collect_sources(SOURCES "${CMAKE_CURRENT_SOURCE_DIR}" "${EXCLUDE_PATHS}")

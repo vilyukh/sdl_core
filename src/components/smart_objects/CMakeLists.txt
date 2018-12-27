@@ -29,30 +29,33 @@ project(smart_objects)
 add_library(${PROJECT_NAME} STATIC)
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
-target_sources(${PROJECT_NAME}
-               PRIVATE
-               "${CMAKE_CURRENT_LIST_DIR}/src/always_false_schema_item.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/always_true_schema_item.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/array_schema_item.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/bool_schema_item.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/default_shema_item.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/enum_schema_item.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/number_schema_item.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/object_schema_item.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/schema_item.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/smart_object.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/smart_schema.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/string_schema_item.cc"
+target_sources(
+    ${PROJECT_NAME}
+    PRIVATE
+    "${CMAKE_CURRENT_LIST_DIR}/src/always_false_schema_item.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/always_true_schema_item.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/array_schema_item.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/bool_schema_item.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/default_shema_item.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/enum_schema_item.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/number_schema_item.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/object_schema_item.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/schema_item.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/smart_object.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/smart_schema.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/string_schema_item.cc"
 )
 
-target_link_libraries(${PROJECT_NAME}
-                      PUBLIC rpc_base::rpc_base utils::utils
-                      PRIVATE components::interface
+target_link_libraries(
+    ${PROJECT_NAME}
+    PUBLIC rpc_base::rpc_base utils::utils
+    PRIVATE components::interface
 )
 
-target_include_directories(${PROJECT_NAME}
-                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
-                           PUBLIC "${COMPONENTS_DIR}/include"
+target_include_directories(
+    ${PROJECT_NAME}
+    PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
+    PUBLIC "${COMPONENTS_DIR}/include"
 )
 
 if(BUILD_TESTS)

@@ -30,20 +30,23 @@ project(protocol)
 add_library(${PROJECT_NAME} STATIC)
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
-target_sources(${PROJECT_NAME}
-               PRIVATE
-               "${CMAKE_CURRENT_LIST_DIR}/src/bson_object_keys.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/message_priority.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/raw_message.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/rpc_type.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/service_type.cc"
+target_sources(
+    ${PROJECT_NAME}
+    PRIVATE
+    "${CMAKE_CURRENT_LIST_DIR}/src/bson_object_keys.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/message_priority.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/raw_message.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/rpc_type.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/service_type.cc"
 )
 
-target_link_libraries(${PROJECT_NAME}
-                      PUBLIC utils::utils
-                      PRIVATE components::interface
+target_link_libraries(
+    ${PROJECT_NAME}
+    PUBLIC utils::utils
+    PRIVATE components::interface
 )
 
-target_include_directories(${PROJECT_NAME}
-                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
+target_include_directories(
+    ${PROJECT_NAME}
+    PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
 )

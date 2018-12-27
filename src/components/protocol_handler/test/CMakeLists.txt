@@ -37,7 +37,7 @@ collect_sources(SOURCES ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_sources(${PROJECT_NAME} PRIVATE ${SOURCES})
 
-target_link_libraries(${PROJECT_NAME}
-                      PRIVATE protocol_handler::protocol_handler
-                              components::interface
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE protocol_handler::protocol_handler components::interface
 )

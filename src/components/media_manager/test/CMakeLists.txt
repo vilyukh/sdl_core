@@ -30,13 +30,15 @@ create_test(${PROJECT_NAME})
 
 target_include_directories(
     ${PROJECT_NAME}
-    PRIVATE ${COMPONENTS_DIR}/media_manager/test/include
-            ${COMPONENTS_DIR}/application_manager/test/include
+    PRIVATE
+        ${COMPONENTS_DIR}/media_manager/test/include
+        ${COMPONENTS_DIR}/application_manager/test/include
 )
 
-target_sources(${PROJECT_NAME}
-               PRIVATE
-               ${CMAKE_CURRENT_SOURCE_DIR}/media_manager_impl_test.cc
+target_sources(
+    ${PROJECT_NAME}
+    PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/media_manager_impl_test.cc
 )
 target_link_libraries(
     ${PROJECT_NAME}
