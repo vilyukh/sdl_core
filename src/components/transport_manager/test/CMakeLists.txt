@@ -28,8 +28,10 @@
 project(transport_manager_test)
 create_test(${PROJECT_NAME})
 
-target_include_directories(${PROJECT_NAME}
-                           PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
 
 set(EXCLUDE_PATHS platform_specific raw_message_matcher.cc)
 
@@ -37,24 +39,25 @@ collect_sources(SOURCES "${CMAKE_CURRENT_SOURCE_DIR}" "${EXCLUDE_PATHS}")
 
 set(PLATFORM_DEPENDENT_SOURCES)
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-  collect_sources(PLATFORM_DEPENDENT_SOURCES platform_specific/linux)
+    collect_sources(PLATFORM_DEPENDENT_SOURCES platform_specific/linux)
 endif()
 list(APPEND SOURCES ${PLATFORM_DEPENDENT_SOURCES})
 
 target_sources(${PROJECT_NAME} PRIVATE ${SOURCES})
 
-target_link_libraries(${PROJECT_NAME}
-                      PRIVATE transport_manager::transport_manager
-                              components::interface)
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE transport_manager::transport_manager components::interface
+)
 
 if(BUILD_BT_SUPPORT)
-  target_link_libraries(${PROJECT_NAME} PRIVATE bluetooth)
+    target_link_libraries(${PROJECT_NAME} PRIVATE bluetooth)
 endif()
 
 if(BUILD_USB_SUPPORT)
-  if(UNIX AND NOT QNXNTO)
-    target_link_libraries(${PROJECT_NAME} PRIVATE libusb-1.0.so)
-  endif()
+    if(UNIX AND NOT QNXNTO)
+        target_link_libraries(${PROJECT_NAME} PRIVATE libusb-1.0.so)
+    endif()
 endif()
 
 file(COPY smartDeviceLink_test.ini DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

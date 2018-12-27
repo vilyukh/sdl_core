@@ -29,20 +29,25 @@ project(policy_test)
 create_test(${PROJECT_NAME})
 
 target_include_directories(
-  ${PROJECT_NAME}
-  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include
-          ${COMPONENTS_DIR}/include/test/policy/policy_regular/
-          ${POLICY_MOCK_INCLUDE_PATH}/)
+    ${PROJECT_NAME}
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${COMPONENTS_DIR}/include/test/policy/policy_regular/
+        ${POLICY_MOCK_INCLUDE_PATH}/
+)
 
 collect_sources(SOURCES "${CMAKE_CURRENT_SOURCE_DIR}")
 
 target_sources(${PROJECT_NAME} PRIVATE ${SOURCES})
 
-target_link_libraries(${PROJECT_NAME}
-                      PRIVATE components::interface
-                              Policy::Policy
-                              Policy::policy_table
-                              Policy::usage_statistics)
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE
+        components::interface
+        Policy::Policy
+        Policy::policy_table
+        Policy::usage_statistics
+)
 
 file(COPY valid_sdl_pt_update.json DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 file(COPY sdl_preloaded_pt.json DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

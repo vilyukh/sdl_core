@@ -25,25 +25,31 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-file(COPY
-     ${CMAKE_SOURCE_DIR}/src/appMain/smartDeviceLink.ini
-     DESTINATION
-     ${CMAKE_CURRENT_BINARY_DIR})
+file(
+    COPY
+    ${CMAKE_SOURCE_DIR}/src/appMain/smartDeviceLink.ini
+    DESTINATION
+    ${CMAKE_CURRENT_BINARY_DIR}
+)
 
 project(connection_handler_test)
 create_test(${PROJECT_NAME})
 
 target_include_directories(
-  ${PROJECT_NAME}
-  PRIVATE ${COMPONENTS_DIR}/connection_handler/test/include)
+    ${PROJECT_NAME}
+    PRIVATE ${COMPONENTS_DIR}/connection_handler/test/include
+)
 
-target_sources(${PROJECT_NAME}
-               PRIVATE
-               ${CMAKE_CURRENT_SOURCE_DIR}/connection_handler_impl_test.cc
-               ${CMAKE_CURRENT_SOURCE_DIR}/connection_test.cc
-               ${CMAKE_CURRENT_SOURCE_DIR}/device_test.cc
-               ${CMAKE_CURRENT_SOURCE_DIR}/heart_beat_monitor_test.cc)
+target_sources(
+    ${PROJECT_NAME}
+    PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/connection_handler_impl_test.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/connection_test.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/device_test.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/heart_beat_monitor_test.cc
+)
 
-target_link_libraries(${PROJECT_NAME}
-                      PRIVATE connection_handler::connection_handler
-                              components::interface)
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE connection_handler::connection_handler components::interface
+)

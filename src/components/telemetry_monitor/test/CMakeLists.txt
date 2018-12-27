@@ -28,18 +28,23 @@
 project(telemetry_monitor_test)
 create_test(${PROJECT_NAME})
 
-target_include_directories(${PROJECT_NAME}
-                           PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
 
 collect_sources(SOURCES "${CMAKE_CURRENT_SOURCE_DIR}")
 
 target_sources(${PROJECT_NAME} PRIVATE ${SOURCES})
 
-target_link_libraries(${PROJECT_NAME}
-                      PRIVATE telemetry_monitor::telemetry_monitor
-                              components::interface)
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE telemetry_monitor::telemetry_monitor components::interface
+)
 
-file(COPY
-     ${COMPONENTS_DIR}/telemetry_monitor/test/log4cxx.properties
-     DESTINATION
-     ${CMAKE_CURRENT_BINARY_DIR})
+file(
+    COPY
+    ${COMPONENTS_DIR}/telemetry_monitor/test/log4cxx.properties
+    DESTINATION
+    ${CMAKE_CURRENT_BINARY_DIR}
+)

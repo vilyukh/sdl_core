@@ -31,32 +31,40 @@ add_library(${PROJECT_NAME} STATIC)
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 target_sources(
-  ${PROJECT_NAME}
-  PRIVATE
-  "$<$<BOOL:${ENABLE_SECURITY}>:${CMAKE_CURRENT_LIST_DIR}/src/handshake_handler.cc>"
-  "${CMAKE_CURRENT_LIST_DIR}/src/incoming_data_handler.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/multiframe_builder.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/protocol_handler_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/protocol_packet.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/protocol_payload.cc")
+    ${PROJECT_NAME}
+    PRIVATE
+    "$<$<BOOL:${ENABLE_SECURITY}>:${CMAKE_CURRENT_LIST_DIR}/src/handshake_handler.cc>"
+    "${CMAKE_CURRENT_LIST_DIR}/src/incoming_data_handler.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/multiframe_builder.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/protocol_handler_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/protocol_packet.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/protocol_payload.cc"
+)
 
 sdl_find_package(BSON REQUIRED)
 
-target_link_libraries(${PROJECT_NAME}
-                      PUBLIC config_profile::config_profile
-                             protocol::protocol
-                             utils::utils
-                             connection_handler::connection_handler
-                      PRIVATE components::interface BSON::BSON)
+target_link_libraries(
+    ${PROJECT_NAME}
+    PUBLIC
+        config_profile::config_profile
+        protocol::protocol
+        utils::utils
+        connection_handler::connection_handler
+    PRIVATE components::interface BSON::BSON
+)
 
 if(TELEMETRY_MONITOR)
-  target_link_libraries(${PROJECT_NAME}
-                        PUBLIC telemetry_monitor::telemetry_monitor)
+    target_link_libraries(
+        ${PROJECT_NAME}
+        PUBLIC telemetry_monitor::telemetry_monitor
+    )
 endif()
 
-target_include_directories(${PROJECT_NAME}
-                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include")
+target_include_directories(
+    ${PROJECT_NAME}
+    PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
+)
 
 if(BUILD_TESTS)
-  add_subdirectory(test)
+    add_subdirectory(test)
 endif()

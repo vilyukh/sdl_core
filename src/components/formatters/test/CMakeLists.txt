@@ -28,24 +28,31 @@
 project(formatters_test)
 create_test(${PROJECT_NAME})
 
-target_include_directories(${PROJECT_NAME}
-                           PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
 
-target_sources(${PROJECT_NAME}
-               PRIVATE
-               ${CMAKE_CURRENT_SOURCE_DIR}/CFormatterJsonBase_test.cc
-               ${CMAKE_CURRENT_SOURCE_DIR}/cFormatterJsonSDLRPCv1_test.cc
-               ${CMAKE_CURRENT_SOURCE_DIR}/cFormatterJsonSDLRPCv2_test.cc
-               ${CMAKE_CURRENT_SOURCE_DIR}/CSmartFactory_test.cc
-               ${CMAKE_CURRENT_SOURCE_DIR}/formatter_json_rpc_test.cc
-               ${CMAKE_CURRENT_SOURCE_DIR}/generic_json_formatter_test.cc
-               ${CMAKE_CURRENT_SOURCE_DIR}/meta_formatter_test.cc
-               ${CMAKE_CURRENT_SOURCE_DIR}/src/create_smartSchema.cc
-               ${CMAKE_CURRENT_SOURCE_DIR}/src/meta_formatter_test_helper.cc
-               ${CMAKE_CURRENT_SOURCE_DIR}/src/SmartFactoryTestHelper.cc)
+target_sources(
+    ${PROJECT_NAME}
+    PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/CFormatterJsonBase_test.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/cFormatterJsonSDLRPCv1_test.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/cFormatterJsonSDLRPCv2_test.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/CSmartFactory_test.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/formatter_json_rpc_test.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/generic_json_formatter_test.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/meta_formatter_test.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/create_smartSchema.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/meta_formatter_test_helper.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/SmartFactoryTestHelper.cc
+)
 
-target_link_libraries(${PROJECT_NAME}
-                      PRIVATE formatters::formatters
-                              components::interface
-                              interfaces::HMI_API
-                              interfaces::MOBILE_API)
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE
+        formatters::formatters
+        components::interface
+        interfaces::HMI_API
+        interfaces::MOBILE_API
+)

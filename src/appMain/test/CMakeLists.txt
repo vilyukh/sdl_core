@@ -29,10 +29,12 @@ project(low_voltage_signals_handler_test)
 
 create_test(${PROJECT_NAME})
 
-target_sources(${PROJECT_NAME}
-               PRIVATE
-               ${CMAKE_CURRENT_SOURCE_DIR}/../low_voltage_signals_handler.cc
-               ${CMAKE_CURRENT_LIST_DIR}/low_voltage_signals_handler_test.cc
-               ${COMPONENTS_DIR}/utils/test/mock_signals_posix.cc)
+target_sources(
+    ${PROJECT_NAME}
+    PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/../low_voltage_signals_handler.cc
+    ${CMAKE_CURRENT_LIST_DIR}/low_voltage_signals_handler_test.cc
+    ${COMPONENTS_DIR}/utils/test/mock_signals_posix.cc
+)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE components::interface)

@@ -33,48 +33,53 @@ add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 set(${PROJECT_NAME}_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/include")
 
 target_sources(
-  ${PROJECT_NAME} PRIVATE
-  # src
-  "${CMAKE_CURRENT_LIST_DIR}/src/file_streamer_adapter.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/media_adapter_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/media_manager_impl.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/pipe_streamer_adapter.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/socket_streamer_adapter.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/streamer_adapter.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/streamer_listener.cc"
-  # audio
-  "${CMAKE_CURRENT_LIST_DIR}/src/audio/audio_stream_sender_thread.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/audio/file_audio_streamer_adapter.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/audio/from_mic_recorder_listener.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/audio/pipe_audio_streamer_adapter.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/audio/socket_audio_streamer_adapter.cc"
-  # video
-  "${CMAKE_CURRENT_LIST_DIR}/src/video/file_video_streamer_adapter.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/video/pipe_video_streamer_adapter.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/video/socket_video_streamer_adapter.cc")
+    ${PROJECT_NAME} PRIVATE
+    # src
+    "${CMAKE_CURRENT_LIST_DIR}/src/file_streamer_adapter.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/media_adapter_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/media_manager_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/pipe_streamer_adapter.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/socket_streamer_adapter.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/streamer_adapter.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/streamer_listener.cc"
+    # audio
+    "${CMAKE_CURRENT_LIST_DIR}/src/audio/audio_stream_sender_thread.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/audio/file_audio_streamer_adapter.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/audio/from_mic_recorder_listener.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/audio/pipe_audio_streamer_adapter.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/audio/socket_audio_streamer_adapter.cc"
+    # video
+    "${CMAKE_CURRENT_LIST_DIR}/src/video/file_video_streamer_adapter.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/video/pipe_video_streamer_adapter.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/video/socket_video_streamer_adapter.cc"
+)
 
 if(EXTENDED_MEDIA_MODE)
-  target_sources(
-    ${PROJECT_NAME} PRIVATE
-    # audio
-    "${CMAKE_CURRENT_LIST_DIR}/src/audio/a2dp_source_player_adapter.cc"
-    "${CMAKE_CURRENT_LIST_DIR}/src/audio/from_mic_recorder_adapter.cc"
-    "${CMAKE_CURRENT_LIST_DIR}/src/audio/from_mic_to_file_recorder_thread.cc")
+    target_sources(
+        ${PROJECT_NAME} PRIVATE
+        # audio
+        "${CMAKE_CURRENT_LIST_DIR}/src/audio/a2dp_source_player_adapter.cc"
+        "${CMAKE_CURRENT_LIST_DIR}/src/audio/from_mic_recorder_adapter.cc"
+        "${CMAKE_CURRENT_LIST_DIR}/src/audio/from_mic_to_file_recorder_thread.cc"
+    )
 endif()
 
-target_link_libraries(${PROJECT_NAME}
-                      PUBLIC utils::utils
-                             application_manager::application_manager
-                      PRIVATE components::interface)
+target_link_libraries(
+    ${PROJECT_NAME}
+    PUBLIC utils::utils application_manager::application_manager
+    PRIVATE components::interface
+)
 
 if(QNXNTO)
-  target_link_libraries(${PROJECT_NAME} PUBLIC socket)
+    target_link_libraries(${PROJECT_NAME} PUBLIC socket)
 endif()
 
-target_include_directories(${PROJECT_NAME}
-                           PUBLIC ${${PROJECT_NAME}_INCLUDE_DIRECTORY}
-                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include")
+target_include_directories(
+    ${PROJECT_NAME}
+    PUBLIC ${${PROJECT_NAME}_INCLUDE_DIRECTORY}
+    PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
+)
 
 if(BUILD_TESTS)
-  add_subdirectory(test)
+    add_subdirectory(test)
 endif()

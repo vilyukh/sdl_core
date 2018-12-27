@@ -30,23 +30,30 @@ project(connection_handler)
 add_library(${PROJECT_NAME} STATIC)
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
-target_sources(${PROJECT_NAME}
-               PRIVATE
-               "${CMAKE_CURRENT_LIST_DIR}/src/connection_handler_impl.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/connection.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/device.cc"
-               "${CMAKE_CURRENT_LIST_DIR}/src/heartbeat_monitor.cc")
+target_sources(
+    ${PROJECT_NAME}
+    PRIVATE
+    "${CMAKE_CURRENT_LIST_DIR}/src/connection_handler_impl.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/connection.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/device.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/heartbeat_monitor.cc"
+)
 
-target_link_libraries(${PROJECT_NAME}
-                      PUBLIC encryption::encryption
-                             protocol::protocol
-                             utils::utils
-                             protocol_handler::protocol_handler
-                      PRIVATE components::interface)
+target_link_libraries(
+    ${PROJECT_NAME}
+    PUBLIC
+        encryption::encryption
+        protocol::protocol
+        utils::utils
+        protocol_handler::protocol_handler
+    PRIVATE components::interface
+)
 
-target_include_directories(${PROJECT_NAME}
-                           PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include")
+target_include_directories(
+    ${PROJECT_NAME}
+    PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include"
+)
 
 if(BUILD_TESTS)
-  add_subdirectory(test)
+    add_subdirectory(test)
 endif()

@@ -29,13 +29,15 @@ project(protocol_handler_test)
 create_test(${PROJECT_NAME})
 
 target_include_directories(
-  ${PROJECT_NAME}
-  PRIVATE ${COMPONENTS_DIR}/protocol_handler/test/include)
+    ${PROJECT_NAME}
+    PRIVATE ${COMPONENTS_DIR}/protocol_handler/test/include
+)
 
 collect_sources(SOURCES ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_sources(${PROJECT_NAME} PRIVATE ${SOURCES})
 
-target_link_libraries(${PROJECT_NAME}
-                      PRIVATE protocol_handler::protocol_handler
-                              components::interface)
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE protocol_handler::protocol_handler components::interface
+)

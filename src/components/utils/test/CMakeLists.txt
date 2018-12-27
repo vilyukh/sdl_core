@@ -28,40 +28,50 @@
 project(utils_test)
 create_test(${PROJECT_NAME})
 
-target_include_directories(${PROJECT_NAME}
-                           PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include
-                                   ${COMPONENTS_DIR}/utils/test/include)
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include ${COMPONENTS_DIR}/utils/test/include
+)
 
 include(${CMAKE_SOURCE_DIR}/tools/cmake/helpers/platform.cmake)
 
 set(EXCLUDE_PATHS qdb_wrapper test_generator)
 
 if(NOT ENABLE_LOG)
-  list(APPEND EXCLUDE_PATHS auto_trace_test.cc log_message_loop_thread_test.cc)
+    list(
+        APPEND
+            EXCLUDE_PATHS
+            auto_trace_test.cc
+            log_message_loop_thread_test.cc
+    )
 endif()
 
 if(NOT BUILD_BACKTRACE_SUPPORT)
-  list(APPEND EXCLUDE_PATHS back_trace_test.cc)
+    list(APPEND EXCLUDE_PATHS back_trace_test.cc)
 endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "QNX")
-  # exclude tests for SQLite wrapper
-  list(APPEND EXCLUDE_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/sqlite_wrapper)
-  file(COPY qdbserver.sh DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-  file(COPY test-qdb.ini DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-  file(COPY policy.sql DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+    # exclude tests for SQLite wrapper
+    list(APPEND EXCLUDE_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/sqlite_wrapper)
+    file(COPY qdbserver.sh DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+    file(COPY test-qdb.ini DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+    file(COPY policy.sql DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 else()
-  find_package(Sqlite3 REQUIRED)
-  # exclude tests for QDB wrapper
-  list(APPEND EXCLUDE_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/qdb_wrapper)
-  list(APPEND testLibraries sqlite3)
+    find_package(Sqlite3 REQUIRED)
+    # exclude tests for QDB wrapper
+    list(APPEND EXCLUDE_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/qdb_wrapper)
+    list(APPEND testLibraries sqlite3)
 endif()
 
 # exclude some tests
-list(APPEND EXCLUDE_PATHS
-            generated_code_with_sqlite_test.cc
-            posix_thread_test.cc
-            resource_usage_test.cc)
+list(
+    APPEND
+        EXCLUDE_PATHS
+        generated_code_with_sqlite_test.cc
+        posix_thread_test.cc
+        resource_usage_test.cc
+)
 
 collect_sources(SOURCES "${CMAKE_CURRENT_SOURCE_DIR}" "${EXCLUDE_PATHS}")
 

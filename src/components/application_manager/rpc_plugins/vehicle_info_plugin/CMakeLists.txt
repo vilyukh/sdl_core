@@ -28,49 +28,49 @@
 project(vehicle_info_plugin)
 
 set(
-  PLUGIN_SOURCES
-  "${CMAKE_CURRENT_LIST_DIR}/src/vehicle_info_app_extension.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/vehicle_info_command_factory.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/vehicle_info_hmi_command_factory.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/vehicle_info_mobile_command_factory.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/vehicle_info_plugin.cc"
-  # commands/hmi
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/on_vi_vehicle_data_notification.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_diagnostic_message_request.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_diagnostic_message_response.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_get_dtcs_request.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_get_dtcs_response.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_get_vehicle_data_request.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_get_vehicle_data_response.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_get_vehicle_type_request.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_get_vehicle_type_response.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_is_ready_request.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_is_ready_response.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_read_did_request.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_read_did_response.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_subscribe_vehicle_data_request.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_subscribe_vehicle_data_response.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_unsubscribe_vehicle_data_request.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_unsubscribe_vehicle_data_response.cc"
-  # commands/mobile
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/diagnostic_message_request.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/diagnostic_message_response.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/get_dtcs_request.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/get_dtcs_response.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/get_vehicle_data_request.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/get_vehicle_data_response.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/on_vehicle_data_notification.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/read_did_request.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/read_did_response.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/subscribe_vehicle_data_request.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/subscribe_vehicle_data_response.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/unsubscribe_vehicle_data_request.cc"
-  "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/unsubscribe_vehicle_data_response.cc"
-  )
+    PLUGIN_SOURCES
+    "${CMAKE_CURRENT_LIST_DIR}/src/vehicle_info_app_extension.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/vehicle_info_command_factory.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/vehicle_info_hmi_command_factory.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/vehicle_info_mobile_command_factory.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/vehicle_info_plugin.cc"
+    # commands/hmi
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/on_vi_vehicle_data_notification.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_diagnostic_message_request.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_diagnostic_message_response.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_get_dtcs_request.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_get_dtcs_response.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_get_vehicle_data_request.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_get_vehicle_data_response.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_get_vehicle_type_request.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_get_vehicle_type_response.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_is_ready_request.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_is_ready_response.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_read_did_request.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_read_did_response.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_subscribe_vehicle_data_request.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_subscribe_vehicle_data_response.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_unsubscribe_vehicle_data_request.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/hmi/vi_unsubscribe_vehicle_data_response.cc"
+    # commands/mobile
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/diagnostic_message_request.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/diagnostic_message_response.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/get_dtcs_request.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/get_dtcs_response.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/get_vehicle_data_request.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/get_vehicle_data_response.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/on_vehicle_data_notification.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/read_did_request.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/read_did_response.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/subscribe_vehicle_data_request.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/subscribe_vehicle_data_response.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/unsubscribe_vehicle_data_request.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/commands/mobile/unsubscribe_vehicle_data_response.cc"
+)
 
 add_dynamic_library(${PROJECT_NAME})
 
 if(BUILD_TESTS)
-  add_static_library(${PROJECT_NAME})
-  add_subdirectory(test)
+    add_static_library(${PROJECT_NAME})
+    add_subdirectory(test)
 endif()

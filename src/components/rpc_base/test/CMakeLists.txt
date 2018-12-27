@@ -34,5 +34,7 @@ collect_sources(SOURCES "${CMAKE_CURRENT_SOURCE_DIR}" "${EXCLUDE_PATHS}")
 
 target_sources(${PROJECT_NAME} PRIVATE ${SOURCES})
 
-target_link_libraries(${PROJECT_NAME}
-                      PRIVATE rpc_base::rpc_base components::interface)
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE rpc_base::rpc_base components::interface
+)
